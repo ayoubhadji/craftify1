@@ -6,28 +6,22 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class HomeController {
+public class BackController {
 
     public void goToUsers(ActionEvent event) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/org.example/user_view.fxml")); // Ajuste si besoin
-            Scene scene = new Scene(root);
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(scene);
-            stage.setTitle("Utilisateurs");
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loadScene(event, "/org/example/user_view.fxml", "Gestion des Utilisateurs");
     }
 
-    public void goToProfile(ActionEvent event) {
-        loadScene(event, "/org.example/profile.fxml", "Mon Profil");
+    public void goToDashboard(ActionEvent event) {
+        loadScene(event, "/org/example/dashboard.fxml", "Dashboard");
     }
 
+    public void goToProducts(ActionEvent event) {
+        loadScene(event, "/org/example/products.fxml", "Produits");
+    }
 
     public void logout(ActionEvent event) {
-        loadScene(event, "/org.example/login.fxml", "Connexion");
+        loadScene(event, "/org/example/login.fxml", "Connexion");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

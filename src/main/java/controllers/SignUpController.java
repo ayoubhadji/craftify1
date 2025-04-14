@@ -134,6 +134,7 @@ public class SignUpController {
     }
 
     // Redirect to the login page
+    @FXML
     private void goToLoginPage() {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/login.fxml"));

@@ -1,44 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Hyperlink?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+<?import javafx.scene.layout.HBox?>
+<AnchorPane prefHeight="400.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController" style="-fx-background-color: #f5f8fc;">
 
-    <Label layoutX="50" layoutY="90" prefHeight="18.0" prefWidth="47.0" text="Email:">
-      <font>
-         <Font name="Courier New Bold" size="12.0" />
-      </font></Label>
-    <TextField fx:id="emailField" layoutX="130" layoutY="85" prefWidth="200" />
+    <VBox layoutX="50.0" layoutY="40.0" spacing="15.0" prefWidth="350.0" alignment="CENTER">
+        <Label text="Connexion" textFill="#2a3f5f">
+            <font>
+                <Font name="Segoe UI Semibold" size="28.0" />
+            </font>
+        </Label>
 
-    <Label layoutX="28.0" layoutY="139.0" text="Mot de passe:">
-      <font>
-         <Font name="Courier New Bold" size="12.0" />
-      </font></Label>
-    <PasswordField fx:id="passwordField" layoutX="130" layoutY="135" prefWidth="200" />
+        <Label text="Email:" textFill="#3a3a3a">
+            <font>
+                <Font name="Segoe UI" size="13.0" />
+            </font>
+        </Label>
+        <TextField fx:id="emailField" promptText="Entrez votre email"
+                   style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cfd8dc;" />
 
-    <Button layoutX="153.0" layoutY="186.0" onAction="#handleLogin" text="Se connecter" textFill="#050505">
-      <font>
-         <Font name="Calibri Bold" size="16.0" />
-      </font></Button>
-   <Label layoutX="11.0" layoutY="247.0" prefHeight="19.0" prefWidth="316.0" text="Voullez-vous creer un neveau compt?">
-      <font>
-         <Font name="Courier New Italic" size="15.0" />
-      </font>
-   </Label>
-   <Button layoutX="330.0" layoutY="238.0" mnemonicParsing="false" onAction="#goTosignup" prefHeight="30.0" prefWidth="58.0" text="sign up">
-      <font>
-         <Font name="Calibri Bold" size="11.0" />
-      </font>
-   </Button>
-   <Label layoutX="133.0" layoutY="14.0" text="Connexion">
-      <font>
-         <Font name="Courier New Bold" size="27.0" />
-      </font>
-   </Label>
-    
+        <Label text="Mot de passe:" textFill="#3a3a3a">
+            <font>
+                <Font name="Segoe UI" size="13.0" />
+            </font>
+        </Label>
+        <PasswordField fx:id="passwordField" promptText="••••••••"
+                       style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cfd8dc;" />
+
+        <Hyperlink text="Mot de passe oublié ?"
+                   style="-fx-text-fill: #007acc; -fx-underline: true;"/>
+
+        <Button text="Se connecter" onAction="#handleLogin"
+                style="-fx-background-color: #007acc; -fx-text-fill: white; -fx-background-radius: 10;">
+            <font>
+                <Font name="Segoe UI Bold" size="16.0" />
+            </font>
+        </Button>
+
+        <HBox spacing="5.0" alignment="CENTER">
+            <Label text="Vous n'avez pas de compte ?" textFill="#5f5f5f" />
+            <Hyperlink text="S'inscrire" onAction="#goTosignup"
+                       style="-fx-text-fill: #007acc; -fx-underline: true;" />
+        </HBox>
+    </VBox>
+
 </AnchorPane>

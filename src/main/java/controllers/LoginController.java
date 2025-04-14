@@ -9,6 +9,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utils.Session;
+
 
 public class LoginController {
 
@@ -27,10 +29,16 @@ public class LoginController {
         User user = userDAO.login(email, password);
 
         if (user != null) {
+            Session.setCurrentUser(user);
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/home.fxml"));
-                Parent root = loader.load();
+                FXMLLoader loader;
+                if (user.getRole().equalsIgnoreCase("ADMIN")) {
+                    loader = new FXMLLoader(getClass().getResource("/org.example/dashboard.fxml"));
+                } else {
+                    loader = new FXMLLoader(getClass().getResource("/org.example/home.fxml"));
+                }
 
+                Parent root = loader.load();
                 Stage stage = (Stage) emailField.getScene().getWindow();
                 stage.setScene(new Scene(root));
                 stage.setTitle("Accueil");
@@ -46,6 +54,7 @@ public class LoginController {
             alert.showAndWait();
         }
     }
+
     public void goTosignup(ActionEvent event) {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/org.example/signup.fxml")); // Ajuste si besoin
