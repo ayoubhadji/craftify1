@@ -1,14 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<VBox alignment="CENTER" prefHeight="666.0" prefWidth="394.0" spacing="10" style="-fx-padding: 20;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="$CONTROLLER_NAME$"
-            prefHeight="400.0" prefWidth="600.0" >
+    <Label style="-fx-font-size: 18px;" text="Sign Up" />
 
-</AnchorPane>
+    <TextField fx:id="nomField" promptText="Nom" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <TextField fx:id="codeField" prefHeight="26.0" prefWidth="333.0" promptText="Code" />
+
+    <ComboBox fx:id="roleComboBox" prefHeight="26.0" prefWidth="345.0" promptText="Role">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="ARTISAN"/>
+                <String fx:value="USER"/>
+                <String fx:value="ADMIN"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <ComboBox fx:id="sexeComboBox" prefHeight="26.0" prefWidth="345.0" promptText="Gender">
+        <items>
+            <FXCollections fx:factory="observableArrayList">
+                <String fx:value="Homme"/>
+                <String fx:value="Femme"/>
+            </FXCollections>
+        </items>
+    </ComboBox>
+
+    <DatePicker fx:id="dateNaissancePicker" prefHeight="26.0" prefWidth="354.0" promptText="Date Naissance" />
+
+    <TextField fx:id="telField" promptText="tel" />
+    <TextField fx:id="addressField" promptText="Address" />
+
+    <Button onAction="#handleSignUp" text="Sign Up" />
+</VBox>

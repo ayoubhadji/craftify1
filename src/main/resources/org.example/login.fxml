@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="300" prefWidth="400" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.LoginController">
+
+    <Label layoutX="50" layoutY="90" prefHeight="18.0" prefWidth="47.0" text="Email:">
+      <font>
+         <Font name="Courier New Bold" size="12.0" />
+      </font></Label>
+    <TextField fx:id="emailField" layoutX="130" layoutY="85" prefWidth="200" />
+
+    <Label layoutX="28.0" layoutY="139.0" text="Mot de passe:">
+      <font>
+         <Font name="Courier New Bold" size="12.0" />
+      </font></Label>
+    <PasswordField fx:id="passwordField" layoutX="130" layoutY="135" prefWidth="200" />
+
+    <Button layoutX="153.0" layoutY="186.0" onAction="#handleLogin" text="Se connecter" textFill="#050505">
+      <font>
+         <Font name="Calibri Bold" size="16.0" />
+      </font></Button>
+   <Label layoutX="11.0" layoutY="247.0" prefHeight="19.0" prefWidth="316.0" text="Voullez-vous creer un neveau compt?">
+      <font>
+         <Font name="Courier New Italic" size="15.0" />
+      </font>
+   </Label>
+   <Button layoutX="330.0" layoutY="238.0" mnemonicParsing="false" onAction="#goTosignup" prefHeight="30.0" prefWidth="58.0" text="sign up">
+      <font>
+         <Font name="Calibri Bold" size="11.0" />
+      </font>
+   </Button>
+   <Label layoutX="133.0" layoutY="14.0" text="Connexion">
+      <font>
+         <Font name="Courier New Bold" size="27.0" />
+      </font>
+   </Label>
+    
+</AnchorPane>

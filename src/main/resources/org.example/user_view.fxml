@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="400.0" spacing="10" style="-fx-padding: 20;"
+      xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.UserFXController">
+
+    <Label style="-fx-font-size: 18px;" text="Ajouter un Utilisateur" />
+
+    <TextField fx:id="nomField" promptText="Nom" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <TextField fx:id="codeField" promptText="Code" />
+
+    <ComboBox fx:id="roleComboBox" promptText="Rôle" />
+    <ComboBox fx:id="sexeComboBox" promptText="Sexe" />
+
+    <DatePicker fx:id="dateNaissancePicker" promptText="Date de naissance" />
+
+    <TextField fx:id="telField" promptText="Téléphone" />
+    <TextField fx:id="addressField" promptText="Adresse" />
+
+    <HBox spacing="10">
+        <Button onAction="#ajouterUser" text="Ajouter" />
+        <Button text="Modifier" onAction="#updateSelectedUser"/>
+        <Button onAction="#showSelectedUser" text="Afficher" />
+        <Button onAction="#deleteSelectedUser" text="Supprimer" />
+    </HBox>
+
+    <Label style="-fx-font-weight: bold;" text="Utilisateurs existants :" />
+    <TableView fx:id="userTable" prefHeight="300">
+        <columns>
+            <TableColumn fx:id="idCol" text="ID" />
+            <TableColumn fx:id="nomCol" text="Nom" />
+            <TableColumn fx:id="emailCol" text="Email" />
+            <TableColumn fx:id="codeCol" text="Code" />
+            <TableColumn fx:id="roleCol" text="Rôle" />
+            <TableColumn fx:id="sexeCol" text="Sexe" />
+            <TableColumn fx:id="naissanceCol" text="Date Naissance" />
+            <TableColumn fx:id="joinCol" text="Date Join" />
+            <TableColumn fx:id="telCol" text="Téléphone" />
+            <TableColumn fx:id="addressCol" text="Adresse" />
+        </columns>
+    </TableView>
+    <TextField fx:id="searchField" promptText="Rechercher par nom ou email" onKeyReleased="#filterUsers" />
+
+</VBox>
