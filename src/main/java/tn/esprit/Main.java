@@ -1,6 +1,6 @@
 package tn.esprit;
 
-import controllers.UserControllerConsole;
+import controllers.user.UserControllerConsole;
 import entity.User;
 
 import java.time.LocalDateTime;

@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="750.0" prefWidth="900.0" spacing="12" style="-fx-padding: 25; -fx-background-color: #f5f8fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.UserFXController">
+<VBox alignment="CENTER" prefHeight="750.0" prefWidth="900.0" spacing="12" style="-fx-padding: 25; -fx-background-color: #f5f8fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.UserFXController">
 
     <Label text="Gestion des Utilisateurs" textFill="#2a3f5f">
         <font>

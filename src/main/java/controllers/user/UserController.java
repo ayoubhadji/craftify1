@@ -1,15 +1,18 @@
-package controllers;
+package controllers.user;
 
 import entity.User;
 import DAO.UserDAO;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+
 import java.util.List;
+
+import javafx.stage.Stage;
 import utils.Session;
 
 public class UserController {
@@ -21,6 +24,8 @@ public class UserController {
     private Label emailLabel;
     @FXML
     private Label roleLabel;
+    @FXML
+    private Button backButton;
 
     public void initialize() {
         User user = Session.getCurrentUser();
@@ -29,17 +34,23 @@ public class UserController {
             emailLabel.setText(user.getEmail());
             roleLabel.setText(user.getRole());
         }
+
+        backButton.setOnAction(event -> {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("/org.example/home.fxml"));
+                Stage stage = (Stage) backButton.getScene().getWindow();
+                stage.setScene(new Scene(root));
+                stage.setTitle("Accueil");
+                stage.show();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public UserController() {
         this.userDAO = new UserDAO(); // Initialisation
     }
-
-    public void ajouterUser(ActionEvent actionEvent) {
-        // Ancienne version console/test
-        // Tu peux la garder si tu veux encore lancer via console
-    }
-
 
     public List<User> getAllUsers() {
         try {

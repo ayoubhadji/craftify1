@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" prefHeight="700.0" prefWidth="450.0" spacing="12" style="-fx-padding: 30; -fx-background-color: #f5f8fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.SignUpController">
+<VBox alignment="CENTER" prefHeight="700.0" prefWidth="450.0" spacing="12" style="-fx-padding: 30; -fx-background-color: #f5f8fc;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.SignUpController">
 
     <Label text="Créer un compte" textFill="#2a3f5f">
         <font>
