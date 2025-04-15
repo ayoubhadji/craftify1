@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.DatePicker?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.ExpeditionController"
+            prefWidth="600" prefHeight="500">
+    <children>
+        <Label layoutX="50" layoutY="10" text="Titre:"/>
+        <TextField fx:id="titreField" layoutX="150" layoutY="10" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="50" text="Objectif:"/>
+        <TextField fx:id="objectifField" layoutX="150" layoutY="50" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="90" text="Date début:"/>
+        <DatePicker fx:id="dateDebutPicker" layoutX="150" layoutY="90"/>
+
+        <Label layoutX="50" layoutY="130" text="Date fin:"/>
+        <DatePicker fx:id="dateFinPicker" layoutX="150" layoutY="130"/>
+
+        <Label layoutX="50" layoutY="170" text="ID Aventurier:"/>
+        <TextField fx:id="aventurierIdField" layoutX="150" layoutY="170" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="210" text="URL Vidéo:"/>
+        <TextField fx:id="videoUrlField" layoutX="150" layoutY="210" prefWidth="400"/>
+
+        <Button text="Ajouter" layoutX="50" layoutY="260" onAction="#ajouterExpedition"/>
+        <Button text="Modifier" layoutX="150" layoutY="260" onAction="#modifierExpedition"/>
+        <Button text="Supprimer" layoutX="250" layoutY="260" onAction="#supprimerExpedition"/>
+        <Button text="Voir Aventurier" onAction="#onVoirAventurierClick"/>
+
+        <ListView fx:id="expeditionListView" layoutX="50" layoutY="310" prefWidth="500" prefHeight="150"/>
+    </children>
+</AnchorPane>

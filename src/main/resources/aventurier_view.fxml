@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.DatePicker?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.AventurierController"
+            prefWidth="600" prefHeight="500">
+    <children>
+        <Label layoutX="50" layoutY="10" text="Nom:"/>
+        <TextField fx:id="nomField" layoutX="150" layoutY="10" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="50" text="Prénom:"/>
+        <TextField fx:id="prenomField" layoutX="150" layoutY="50" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="90" text="Email:"/>
+        <TextField fx:id="emailField" layoutX="150" layoutY="90" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="130" text="Date d'inscription:"/>
+        <DatePicker fx:id="dateInscriptionPicker" layoutX="150" layoutY="130"/>
+
+        <Label layoutX="50" layoutY="170" text="Statut:"/>
+        <TextField fx:id="statusField" layoutX="150" layoutY="170" prefWidth="400"/>
+
+        <Label layoutX="50" layoutY="210" text="Téléphone:"/>
+        <TextField fx:id="phoneNumberField" layoutX="150" layoutY="210" prefWidth="400"/>
+
+        <Button text="Ajouter" layoutX="50" layoutY="260" onAction="#ajouterAventurier"/>
+        <Button text="Modifier" layoutX="150" layoutY="260" onAction="#modifierAventurier"/>
+        <Button text="Supprimer" layoutX="250" layoutY="260" onAction="#supprimerAventurier"/>
+        <Button text="Voir Expéditions" onAction="#onVoirExpeditionClick"/>
+
+        <ListView fx:id="aventurierListView" layoutX="50" layoutY="310" prefWidth="500" prefHeight="150"/>
+    </children>
+</AnchorPane>
