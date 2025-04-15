@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.PostController"
+      spacing="20"
+      alignment="TOP_CENTER"
+      style="-fx-background-color: #f5f5f5;"
+      prefWidth="600" prefHeight="700">
+
+    <padding>
+        <Insets top="20" right="30" bottom="20" left="30"/>
+    </padding>
+
+    <!-- Toggle button -->
+    <Button fx:id="toggleFormButton"
+            text="➕ Ajouter un Post"
+            onAction="#togglePostForm"
+            style="-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;"/>
+
+    <!-- Post form container -->
+    <TitledPane fx:id="postFormPane" text="Créer un Post" expanded="true" visible="false" managed="false"
+                style="-fx-font-weight: bold;">
+        <VBox spacing="15" style="-fx-background-color: white;">
+            <padding>
+                <Insets top="20" right="20" bottom="20" left="20"/>
+            </padding>
+
+
+
+            <GridPane hgap="15" vgap="15">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" minWidth="120"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Type:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+                <TextField fx:id="typePostField" promptText="Type du post" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+                <Label text="Contenu:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <TextField fx:id="contenuField" promptText="Contenu du post" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Image:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <HBox spacing="10" GridPane.rowIndex="2" GridPane.columnIndex="1">
+                    <TextField fx:id="mediaUrlField" promptText="Chemin vers une image" HBox.hgrow="ALWAYS"/>
+                    <Button text="📁" onAction="#browseImage">
+                        <tooltip>
+                            <Tooltip text="Choisir une image"/>
+                        </tooltip>
+                    </Button>
+                </HBox>
+
+                <Label text="Date de publication:" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <DatePicker fx:id="datePublicationPicker" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Tranche d'âge:" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <TextField fx:id="trancheDageField" promptText="Ex: 18-25" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Likes:" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <TextField fx:id="nmbLikeField" promptText="Nombre de likes" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+            </GridPane>
+
+            <HBox spacing="20" alignment="CENTER">
+                <Button text="✅ Ajouter" onAction="#addPost"
+                        style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;"/>
+                <Button text="❌ Annuler" onAction="#cancelEditPost"
+                        style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+            </HBox>
+        </VBox>
+    </TitledPane>
+
+    <Label text="🗂️ Liste des Posts"
+           style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;"/>
+
+    <ScrollPane fitToWidth="true" prefHeight="350" style="-fx-background: #ffffff;">
+        <VBox fx:id="postContainer" spacing="10">
+            <padding>
+                <Insets top="10" right="10" bottom="10" left="10"/>
+            </padding>
+        </VBox>
+
+    </ScrollPane>
+</VBox>
