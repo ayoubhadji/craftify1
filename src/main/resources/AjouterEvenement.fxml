@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.AjouterEvenementController"
+      spacing="10" prefWidth="400" prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Ajouter un Événement" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+        <VBox spacing="10">
+            <Label text="Nom:"/>
+            <TextField fx:id="nomField"/>
+
+            <Label text="Description:"/>
+            <TextArea fx:id="descriptionField" prefRowCount="3"/>
+
+            <Label text="Date de début:"/>
+            <DatePicker fx:id="dateDebutPicker"/>
+
+            <Label text="Date de fin:"/>
+            <DatePicker fx:id="dateFinPicker"/>
+
+            <Label text="Lieu:"/>
+            <TextField fx:id="lieuField"/>
+
+            <Label text="Capacité:"/>
+            <TextField fx:id="capaciteField"/>
+
+            <Label text="Type d'événement:"/>
+            <TextField fx:id="typeField"/>
+
+            <Label text="Prix:"/>
+            <TextField fx:id="prixField"/>
+
+            <Label text="Organisateur:"/>
+            <TextField fx:id="organisateurField"/>
+
+            <Label text="Image (URL):"/>
+            <TextField fx:id="imageField"/>
+        </VBox>
+    </ScrollPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Annuler" onAction="#handleAnnuler"/>
+        <Button text="Ajouter" onAction="#handleAjouter" style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+    </HBox>
+</VBox>
