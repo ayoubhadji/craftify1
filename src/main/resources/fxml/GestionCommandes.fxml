@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.artisanat.controllers.GestionCommandesController"
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Gestion des Commandes" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <ComboBox fx:id="clientCombo" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Statut:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="statutCombo" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Produit:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <ComboBox fx:id="produitCombo" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Quantité:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="quantiteField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Ajouter Ligne" onAction="#ajouterLigneCommande"/>
+        <Button text="Créer Commande" onAction="#creerCommande"/>
+        <Button text="Modifier Statut" onAction="#modifierStatut"/>
+        <Button text="Annuler Commande" onAction="#annulerCommande"/>
+    </HBox>
+
+    <TableView fx:id="lignesCommandeTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="produitCol" text="Produit"/>
+            <TableColumn fx:id="quantiteCol" text="Quantité"/>
+            <TableColumn fx:id="prixUnitaireCol" text="Prix Unitaire"/>
+            <TableColumn fx:id="sousTotalCol" text="Sous-Total"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Label text="Montant Total:" style="-fx-font-weight: bold;"/>
+        <Label fx:id="montantTotalLabel" style="-fx-font-weight: bold;"/>
+    </HBox>
+
+    <TableView fx:id="commandesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="commandeIdCol" text="ID"/>
+            <TableColumn fx:id="clientCol" text="Client"/>
+            <TableColumn fx:id="dateCol" text="Date"/>
+            <TableColumn fx:id="montantCol" text="Montant"/>
+            <TableColumn fx:id="statutCol" text="Statut"/>
+        </columns>
+    </TableView>
+
+</VBox>

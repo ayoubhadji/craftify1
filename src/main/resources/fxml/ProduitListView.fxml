@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ProduitListController">
+    <children>
+        <Label text="Gestion Produit" layoutX="280" layoutY="20">
+            <font>
+                <Font name="Arial" size="20" />
+            </font>
+        </Label>
+
+        <!-- Liste des produits -->
+        <ListView fx:id="listViewProduits" layoutX="50" layoutY="60" prefWidth="600" prefHeight="200" />
+
+        <!-- Boutons -->
+        <Button text="Ajouter" layoutX="50" layoutY="300" onAction="#handleAddProduit" />
+        <Button text="Modifier" layoutX="150" layoutY="300" onAction="#handleEditProduit" />
+        <Button text="Supprimer" layoutX="250" layoutY="300" onAction="#handleDeleteProduit" />
+    </children>
+</AnchorPane>

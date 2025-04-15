@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="com.artisanat.controllers.MainMenuController"
+      spacing="20">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Système de Gestion d'Art et Artisanat" 
+           style="-fx-font-size: 24px; -fx-font-weight: bold;"
+           alignment="CENTER"/>
+
+    <VBox spacing="10" alignment="CENTER">
+        <Button text="Gestion des Produits" 
+                onAction="#ouvrirGestionProduits"
+                style="-fx-font-size: 14px;"
+                maxWidth="200"/>
+
+        <Button text="Gestion des Commandes" 
+                onAction="#ouvrirGestionCommandes"
+                style="-fx-font-size: 14px;"
+                maxWidth="200"/>
+
+        <Button text="Quitter" 
+                onAction="#quitterApplication"
+                style="-fx-font-size: 14px;"
+                maxWidth="200"/>
+    </VBox>
+
+</VBox> 
