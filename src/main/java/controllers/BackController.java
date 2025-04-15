@@ -9,19 +9,19 @@ import javafx.stage.Stage;
 public class BackController {
 
     public void goToUsers(ActionEvent event) {
-        loadScene(event, "/org/example/user_view.fxml", "Gestion des Utilisateurs");
+        loadScene(event, "/org.example/user_view.fxml", "Gestion des Utilisateurs");
     }
 
     public void goToDashboard(ActionEvent event) {
-        loadScene(event, "/org/example/dashboard.fxml", "Dashboard");
+        loadScene(event, "/org.example/dashboard.fxml", "Dashboard");
     }
 
     public void goToProducts(ActionEvent event) {
-        loadScene(event, "/org/example/products.fxml", "Produits");
+        loadScene(event, "/org.example/products.fxml", "Produits");
     }
 
     public void logout(ActionEvent event) {
-        loadScene(event, "/org/example/login.fxml", "Connexion");
+        loadScene(event, "/org.example/login.fxml", "Connexion");
     }
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

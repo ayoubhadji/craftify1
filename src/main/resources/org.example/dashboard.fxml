@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.BackController">
+<BorderPane prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.BackController">
 
     <!-- Sidebar gauche -->
     <left>
@@ -35,10 +35,12 @@
                     <Font name="Segoe UI Semibold" size="24.0" />
                 </font>
             </Label>
+
         </HBox>
     </top>
 
     <!-- Contenu principal -->
+
     <center>
         <VBox alignment="TOP_CENTER" prefHeight="578.0" prefWidth="701.0" spacing="30" style="-fx-padding: 40;">
             <Label style="-fx-font-size: 18px; -fx-text-fill: #34495e;" text="Bienvenue dans le BackOffice Craftify ! " />
@@ -55,5 +57,6 @@
                 </VBox>
             </HBox>
         </VBox>
+
     </center>
 </BorderPane>
