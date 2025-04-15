@@ -1,37 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.control.DatePicker?>
 
 <AnchorPane xmlns:fx="http://javafx.com/fxml"
             fx:controller="tn.esprit.controllers.ExpeditionController"
-            prefWidth="600" prefHeight="500">
+            prefWidth="600" prefHeight="550">
     <children>
-        <Label layoutX="50" layoutY="10" text="Titre:"/>
-        <TextField fx:id="titreField" layoutX="150" layoutY="10" prefWidth="400"/>
+        <VBox layoutX="30" layoutY="20" spacing="15" prefWidth="540">
+            <padding>
+                <Insets top="10" left="10" right="10" bottom="10"/>
+            </padding>
+            <children>
 
-        <Label layoutX="50" layoutY="50" text="Objectif:"/>
-        <TextField fx:id="objectifField" layoutX="150" layoutY="50" prefWidth="400"/>
+                <Label text="Gestion des Expéditions"
+                       style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-        <Label layoutX="50" layoutY="90" text="Date début:"/>
-        <DatePicker fx:id="dateDebutPicker" layoutX="150" layoutY="90"/>
+                <HBox spacing="10">
+                    <Label text="Titre:" minWidth="120"/>
+                    <TextField fx:id="titreField" prefWidth="400"/>
+                </HBox>
 
-        <Label layoutX="50" layoutY="130" text="Date fin:"/>
-        <DatePicker fx:id="dateFinPicker" layoutX="150" layoutY="130"/>
+                <HBox spacing="10">
+                    <Label text="Objectif:" minWidth="120"/>
+                    <TextField fx:id="objectifField" prefWidth="400"/>
+                </HBox>
 
-        <Label layoutX="50" layoutY="170" text="ID Aventurier:"/>
-        <TextField fx:id="aventurierIdField" layoutX="150" layoutY="170" prefWidth="400"/>
+                <HBox spacing="10">
+                    <Label text="Date début:" minWidth="120"/>
+                    <DatePicker fx:id="dateDebutPicker"/>
+                </HBox>
 
-        <Label layoutX="50" layoutY="210" text="URL Vidéo:"/>
-        <TextField fx:id="videoUrlField" layoutX="150" layoutY="210" prefWidth="400"/>
+                <HBox spacing="10">
+                    <Label text="Date fin:" minWidth="120"/>
+                    <DatePicker fx:id="dateFinPicker"/>
+                </HBox>
 
-        <Button text="Ajouter" layoutX="50" layoutY="260" onAction="#ajouterExpedition"/>
-        <Button text="Modifier" layoutX="150" layoutY="260" onAction="#modifierExpedition"/>
-        <Button text="Supprimer" layoutX="250" layoutY="260" onAction="#supprimerExpedition"/>
-        <Button text="Voir Aventurier" onAction="#onVoirAventurierClick"/>
+                <HBox spacing="10">
+                    <Label text="ID Aventurier:" minWidth="120"/>
+                    <TextField fx:id="aventurierIdField" prefWidth="400"/>
+                </HBox>
 
-        <ListView fx:id="expeditionListView" layoutX="50" layoutY="310" prefWidth="500" prefHeight="150"/>
+                <HBox spacing="10">
+                    <Label text="URL Vidéo:" minWidth="120"/>
+                    <TextField fx:id="videoUrlField" prefWidth="400"/>
+                </HBox>
+
+                <HBox spacing="15" alignment="CENTER_LEFT">
+                    <Button text="Ajouter" onAction="#ajouterExpedition"
+                            style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+                    <Button text="Modifier" onAction="#modifierExpedition"
+                            style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+                    <Button text="Supprimer" onAction="#supprimerExpedition"
+                            style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
+                    <Button text="Voir Aventurier" onAction="#onVoirAventurierClick"/>
+                </HBox>
+
+                <Label text="Liste des Expéditions"
+                       style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+                <ListView fx:id="expeditionListView" prefHeight="180"/>
+
+            </children>
+        </VBox>
     </children>
 </AnchorPane>
