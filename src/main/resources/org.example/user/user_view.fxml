@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Pagination?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<ScrollPane fitToHeight="true" fitToWidth="true" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.user.UserFXController">
+    <content>
+        <VBox alignment="CENTER" prefHeight="794.0" prefWidth="953.0" spacing="12" style="-fx-padding: 25; -fx-background-color: #f5f8fc;">
+            <!-- Bouton de retour -->
+            <HBox alignment="CENTER_LEFT">
+                <Button onAction="#retourDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 8;" text="← Retour au Dashboard" />
+            </HBox>
+            <Label prefHeight="30.0" prefWidth="277.0" text="Gestion des Utilisateurs" textFill="#2a3f5f">
+                <font>
+                    <Font name="Segoe UI Bold" size="24.0" />
+                </font>
+            </Label>
+
+            <GridPane hgap="10" style="-fx-padding: 15;" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints percentWidth="50" />
+                    <ColumnConstraints percentWidth="50" />
+                </columnConstraints>
+
+                <TextField fx:id="nomField" promptText="Nom" GridPane.columnIndex="0" />
+                <TextField fx:id="emailField" promptText="Email" GridPane.columnIndex="1" />
+                <TextField fx:id="codeField" promptText="Code" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <ComboBox fx:id="roleComboBox" prefHeight="26.0" prefWidth="420.0" promptText="Rôle" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <ComboBox fx:id="sexeComboBox" prefHeight="26.0" prefWidth="405.0" promptText="Sexe" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <DatePicker fx:id="dateNaissancePicker" prefHeight="26.0" prefWidth="410.0" promptText="Date de naissance" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="telField" promptText="Téléphone" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="addressField" promptText="Adresse" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <rowConstraints>
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                    <RowConstraints />
+                </rowConstraints>
+            </GridPane>
+
+            <HBox alignment="CENTER" spacing="10">
+                <Button onAction="#ajouterUser" style="-fx-background-color: #28a745; -fx-text-fill: white; -fx-background-radius: 8;" text="Ajouter" />
+                <Button onAction="#updateSelectedUser" style="-fx-background-color: #ffc107; -fx-text-fill: black; -fx-background-radius: 8;" text="Modifier" />
+                <Button onAction="#showSelectedUser" style="-fx-background-color: #17a2b8; -fx-text-fill: white; -fx-background-radius: 8;" text="Afficher" />
+                <Button onAction="#deleteSelectedUser" style="-fx-background-color: #dc3545; -fx-text-fill: white; -fx-background-radius: 8;" text="Supprimer" />
+            </HBox>
+
+            <Label style="-fx-font-size: 14px; -fx-font-weight: bold;" text="Utilisateurs existants :" textFill="#333" />
+            <PieChart fx:id="genderPieChart" prefHeight="300.0" prefWidth="600.0" />
+
+            <TextField fx:id="searchField" onKeyReleased="#filterUsers" promptText="🔍 Rechercher par nom ou email" style="-fx-background-radius: 10; -fx-border-radius: 10; -fx-border-color: #cfd8dc; -fx-padding: 8;" />
+
+            <VBox alignment="CENTER" spacing="10">
+                <TableView fx:id="userTable" prefHeight="360.0" prefWidth="904.0" style="-fx-background-radius: 10; -fx-border-radius: 10;">
+                    <columns>
+                        <TableColumn fx:id="idCol" prefWidth="40" text="ID" />
+                        <TableColumn fx:id="nomCol" prefWidth="100" text="Nom" />
+                        <TableColumn fx:id="emailCol" prefWidth="150" text="Email" />
+                        <TableColumn fx:id="codeCol" prefWidth="80" text="Code" />
+                        <TableColumn fx:id="roleCol" prefWidth="80" text="Rôle" />
+                        <TableColumn fx:id="sexeCol" prefWidth="80" text="Sexe" />
+                        <TableColumn fx:id="naissanceCol" prefWidth="110" text="Naissance" />
+                        <TableColumn fx:id="joinCol" prefWidth="110" text="Join" />
+                        <TableColumn fx:id="telCol" prefWidth="100" text="Téléphone" />
+                        <TableColumn fx:id="addressCol" prefWidth="150" text="Adresse" />
+                    </columns>
+                </TableView>
+
+                <Pagination fx:id="pagination" maxPageIndicatorCount="5" prefWidth="600" />
+            </VBox>
+
+        </VBox>
+    </content>
+</ScrollPane>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/23.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="controllers.produit.AfficherProduitFrontController"
+            prefWidth="1097.0" prefHeight="707.0"
+            style="-fx-background-color: #121212;">
+
+    <!-- Barre de navigation (top) -->
+    <top>
+        <VBox spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #1e1e1e;">
+                <Label prefHeight="30.0" prefWidth="107.0" style="-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;" text="🏠 Craftify">
+                    <font>
+                        <Font name="Segoe UI Bold" size="20.0" />
+                    </font>
+                </Label>
+                <Button onAction="#goHome" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Accueil" />
+                <Button onAction="#goHome" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Foire" />
+                <Button onAction="#goHome" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Evénement" />
+                <Button onAction="#goprudect" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Produit" />
+                <Button onAction="#goHome" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Blog" />
+                <Button onAction="#goHome" prefHeight="26.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Meriam" />
+                <Button onAction="#goToProfile" prefHeight="26.0" prefWidth="92.0" style="-fx-background-color: #2c2c2c; -fx-text-fill: #00adb5; -fx-background-radius: 8;" text="👤 Profil" />
+                <Button onAction="#logout" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;" text="🚪 Déconnexion" />
+            </HBox>
+            <Label fx:id="messageLabel" style="-fx-text-fill: green; -fx-padding: 5 15;" />
+        </VBox>
+    </top>
+
+    <!-- Centre avec la boutique -->
+    <center>
+        <VBox spacing="20" style="-fx-padding: 20;">
+            <!-- Barre de recherche -->
+            <HBox alignment="CENTER" spacing="10">
+                <TextField fx:id="searchField" prefHeight="40.0" prefWidth="400.0" promptText="Rechercher un produit..."
+                           style="-fx-background-color: #2c2c2c; -fx-text-fill: white; -fx-prompt-text-fill: #888888; -fx-background-radius: 20; -fx-padding: 5 15; -fx-font-size: 14px;">
+                    <font>
+                        <Font size="14.0" />
+                    </font>
+                </TextField>
+            </HBox>
+
+            <!-- Conteneur pour les résultats de recherche -->
+            <VBox fx:id="searchResultsContainer" alignment="CENTER" spacing="10" visible="false" managed="false" />
+
+            <!-- Liste des produits -->
+            <ScrollPane fitToWidth="true" style="-fx-background: transparent; -fx-background-color: transparent;">
+                <FlowPane fx:id="produitsContainer"
+                          hgap="20" vgap="20"
+                          prefWrapLength="900"
+                          alignment="CENTER">
+                    <padding>
+                        <Insets top="10" right="10" bottom="10" left="10" />
+                    </padding>
+                </FlowPane>
+            </ScrollPane>
+        </VBox>
+    </center>
+
+    <!-- Panier flottant -->
+    <right>
+        <VBox prefWidth="300.0" style="-fx-background-color: #1e1e1e; -fx-padding: 20; -fx-spacing: 15;">
+            <Label style="-fx-text-fill: #ffffff; -fx-font-size: 18px; -fx-font-weight: bold;" text="🛒 Votre Panier" />
+            <Separator style="-fx-background-color: #333333;" />
+            <ScrollPane fitToWidth="true" fitToHeight="true" style="-fx-background-color: transparent;">
+                <VBox fx:id="panierItems" spacing="10" style="-fx-padding: 10;">
+                    <!-- Les éléments du panier seront ajoutés dynamiquement ici -->
+                </VBox>
+            </ScrollPane>
+            <Separator style="-fx-background-color: #333333;" />
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Label style="-fx-text-fill: #ffffff; -fx-font-size: 16px;" text="Total:" />
+                <Label fx:id="totalLabel" style="-fx-text-fill: #00adb5; -fx-font-size: 16px; -fx-font-weight: bold;" text="0.00 DT" />
+            </HBox>
+            <Button onAction="#commander" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #00adb5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;" text="Commander" />
+        </VBox>
+    </right>
+
+    <!-- Footer -->
+    <bottom>
+        <VBox prefHeight="90.0" prefWidth="1098.0" style="-fx-background-color: #1e1e1e; -fx-padding: 10;">
+            <Separator style="-fx-background-color: #333333;" />
+            <HBox alignment="CENTER" spacing="20">
+                <Label style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="📍 Djerba, Tunisie" />
+                <Label style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="📞 +216 52733276" />
+                <Label style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="✉ contact@craftify.com" />
+            </HBox>
+            <HBox alignment="CENTER">
+                <Label style="-fx-text-fill: #555555; -fx-font-size: 11px; -fx-padding: 5 0 0 0;" text="© 2025 Craftify. Tous droits réservés." />
+            </HBox>
+        </VBox>
+    </bottom>
+
+</BorderPane>

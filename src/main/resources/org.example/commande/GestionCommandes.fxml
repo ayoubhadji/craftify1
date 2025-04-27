@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10" alignment="CENTER" xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.commande.GestionCommandesController">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+    <HBox alignment="CENTER_LEFT">
+        <Button onAction="#retourDashboard" style="-fx-background-color: #6c757d; -fx-text-fill: white; -fx-background-radius: 8;" text="← Retour au Dashboard" />
+    </HBox>
+
+    <Label text="Gestion des Commandes" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Client ID:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="clientIdField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Statut:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <ComboBox fx:id="statutCombo" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Total:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="totalField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+    </GridPane>
+
+    <HBox spacing="10">
+        <Button text="Ajouter" onAction="#handleAjouter"/>
+        <Button text="Modifier" onAction="#handleModifier"/>
+        <Button text="Supprimer" onAction="#handleSupprimer"/>
+        <Button text="Effacer" onAction="#handleEffacer"/>
+    </HBox>
+
+    <TableView fx:id="commandeTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID"/>
+            <TableColumn fx:id="dateCommandeColumn" text="Date Commande"/>
+            <TableColumn fx:id="statutColumn" text="Statut"/>
+            <TableColumn fx:id="totalColumn" text="Total"/>
+            <TableColumn fx:id="clientIdColumn" text="Client ID"/>
+        </columns>
+    </TableView>
+</VBox>

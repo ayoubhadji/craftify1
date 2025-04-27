@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.commande.MenuCommandesController"
+      spacing="10"
+      alignment="CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Gestion des Commandes" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <VBox spacing="10" alignment="CENTER">
+        <Button text="Ajouter une Commande" onAction="#naviguerVersAjout" prefWidth="200"/>
+        <Button text="Modifier une Commande" onAction="#naviguerVersModification" prefWidth="200"/>
+        <Button text="Supprimer une Commande" onAction="#naviguerVersSuppression" prefWidth="200"/>
+        <Button text="Afficher les Commandes" onAction="#naviguerVersAffichage" prefWidth="200"/>
+        <Button text="Retour au Menu Principal" onAction="#retourMenuPrincipal" prefWidth="200"/>
+    </VBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+</VBox> 

@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Stripe Elements</title>
+    <script src="https://js.stripe.com/v3/"></script>
+    <style>
+        .StripeElement {
+            background-color: white;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #e0e0e0;
+            box-shadow: 0 1px 3px 0 #e6ebf1;
+            -webkit-transition: box-shadow 150ms ease;
+            transition: box-shadow 150ms ease;
+            margin-bottom: 20px;
+        }
+
+        .StripeElement--focus {
+            box-shadow: 0 1px 3px 0 #cfd7df;
+        }
+
+        .StripeElement--invalid {
+            border-color: #fa755a;
+        }
+
+        .StripeElement--webkit-autofill {
+            background-color: #fefde5 !important;
+        }
+
+        #payment-form {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        #card-errors {
+            color: #fa755a;
+            text-align: center;
+            margin-top: 10px;
+            min-height: 20px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="payment-form">
+    <div class="payment-methods">
+        <div id="payment-element"></div>
+    </div>
+    <div id="card-errors" role="alert"></div>
+</div>
+
+<script>
+    let stripe;
+    let elements;
+    let paymentElement;
+    let isProcessing = false;
+
+    // Fonction globale accessible depuis Java
+    window.startPayment = async function() {
+        if (isProcessing) {
+            console.log('Paiement déjà en cours');
+            return;
+        }
+
+        console.log('Début de startPayment');
+        isProcessing = true;
+
+        try {
+            if (!stripe || !elements) {
+                throw new Error('Stripe non initialisé');
+            }
+
+            const result = await stripe.confirmPayment({
+                elements,
+                redirect: 'if_required'
+            });
+
+            console.log('Résultat de confirmPayment:', result);
+
+            if (result.error) {
+                throw result.error;
+            }
+
+            if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
+                console.log('Paiement réussi');
+                window.paymentCallback.onMessage('success', 'Paiement réussi!');
+            } else {
+                throw new Error('État inattendu du paiement');
+            }
+        } catch (error) {
+            console.error('Erreur de paiement:', error);
+            window.paymentCallback.onMessage('error', error.message || 'Erreur lors du paiement');
+        } finally {
+            isProcessing = false;
+        }
+    };
+
+    // Initialisation de Stripe
+    window.addEventListener('message', function(event) {
+        if (event.data.type === 'stripeInit') {
+            console.log('Initialisation de Stripe...');
+
+            try {
+                stripe = Stripe(event.data.publicKey);
+                console.log('Stripe initialisé');
+
+                elements = stripe.elements({
+                    clientSecret: event.data.clientSecret
+                });
+                console.log('Elements créés');
+
+                paymentElement = elements.create('payment');
+                paymentElement.mount('#payment-element');
+                console.log('Payment Element monté');
+
+                window.paymentCallback.onMessage('info', 'Stripe initialisé avec succès');
+            } catch (error) {
+                console.error('Erreur d\'initialisation:', error);
+                window.paymentCallback.onMessage('error', 'Erreur d\'initialisation: ' + error.message);
+            }
+        }
+    });
+</script>
+</body>
+</html>

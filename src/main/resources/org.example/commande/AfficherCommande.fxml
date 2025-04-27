@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.commande.AfficherCommandeController"
+      spacing="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Liste des Commandes" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Filtrer par client :"/>
+        <ComboBox fx:id="clientFilterComboBox"/>
+        <Label text="Filtrer par statut :"/>
+        <ComboBox fx:id="statutFilterComboBox"/>
+        <Button text="Réinitialiser les filtres" onAction="#handleResetFiltres"/>
+    </HBox>
+
+    <TableView fx:id="commandesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="dateColumn" text="Date" prefWidth="150"/>
+            <TableColumn fx:id="clientColumn" text="Client" prefWidth="150"/>
+            <TableColumn fx:id="statutColumn" text="Statut" prefWidth="100"/>
+            <TableColumn fx:id="totalColumn" text="Total" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <Label text="Détails de la Commande" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="lignesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="produitColumn" text="Produit" prefWidth="200"/>
+            <TableColumn fx:id="quantiteColumn" text="Quantité" prefWidth="100"/>
+            <TableColumn fx:id="prixUnitaireColumn" text="Prix Unitaire" prefWidth="100"/>
+            <TableColumn fx:id="sousTotalColumn" text="Sous-Total" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Rafraîchir" onAction="#handleRafraichir"/>
+        <Button text="Retour" onAction="#retourMenuCommandes"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+</VBox> 

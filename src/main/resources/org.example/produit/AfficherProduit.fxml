@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.produit.AfficherProduitController"
+      spacing="20">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Liste des Produits" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="produitsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn text="ID" fx:id="idColumn"/>
+            <TableColumn text="Nom" fx:id="nomColumn"/>
+            <TableColumn text="Description" fx:id="descriptionColumn"/>
+            <TableColumn text="Prix" fx:id="prixColumn"/>
+            <TableColumn text="Stock" fx:id="stockColumn"/>
+            <TableColumn text="Image URL" fx:id="imageUrlColumn"/>
+            <TableColumn text="ID Artisan" fx:id="artisanIdColumn"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Rafraîchir" onAction="#handleRafraichir" 
+                style="-fx-background-color: #9C27B0; -fx-text-fill: white;"/>
+        <Button text="Retour" onAction="#handleRetour" 
+                style="-fx-background-color: #757575; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+</VBox> 

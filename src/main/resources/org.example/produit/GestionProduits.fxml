@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.produit.GestionProduitsController"
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <Label text="Gestion des Produits" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TableView fx:id="produitsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="idColumn" text="ID" prefWidth="50"/>
+            <TableColumn fx:id="nomColumn" text="Nom" prefWidth="150"/>
+            <TableColumn fx:id="descriptionColumn" text="Description" prefWidth="200"/>
+            <TableColumn fx:id="prixColumn" text="Prix" prefWidth="100"/>
+            <TableColumn fx:id="stockColumn" text="Stock" prefWidth="100"/>
+            <TableColumn fx:id="imageUrlColumn" text="URL Image" prefWidth="150"/>
+            <TableColumn fx:id="artisanIdColumn" text="ID Artisan" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10">
+        <Button text="Ajouter" onAction="#naviguerVersAjout"/>
+        <Button text="Modifier" onAction="#naviguerVersModification"/>
+        <Button text="Supprimer" onAction="#naviguerVersSuppression"/>
+        <Button text="Rafraîchir" onAction="#handleRafraichir"/>
+        <Button text="Retour" onAction="#retourMenuPrincipal"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+</VBox> 

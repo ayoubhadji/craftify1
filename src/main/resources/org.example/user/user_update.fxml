@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane prefHeight="600" prefWidth="600" style="-fx-background-color: #f8f8f8;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/23.0.1" fx:controller="controllers.user.UserUpdateController">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="30" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="30.0">
+
+            <Label style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" text="Mettre à jour mon profil" />
+
+            <GridPane hgap="10" style="-fx-background-color: #ffffff; -fx-padding: 25px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);" vgap="10">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT" />
+                    <ColumnConstraints hgrow="ALWAYS" />
+                </columnConstraints>
+
+                <Label text="Nom complet :" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nameField" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Email :" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="emailField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="Code :" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="codeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Sexe :" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                <TextField fx:id="sexeField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                <Label text="Date de Naissance :" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                <TextField fx:id="dateNaissanceField" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+
+                <Label text="Téléphone :" GridPane.rowIndex="7" />
+                <TextField fx:id="telField" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+
+                <Label text="Adresse :" GridPane.rowIndex="8" />
+                <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <rowConstraints>
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+               <RowConstraints />
+            </rowConstraints>
+            </GridPane>
+
+            <Button fx:id="saveButton" style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 8px; -fx-padding: 8px 20px;" text="Enregistrer les modifications" />
+            <Button fx:id="backButton" style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 8px; -fx-padding: 8px 20px;" text="Retour à l'accueil" />
+            
+        </VBox>
+    </children>
+</AnchorPane>

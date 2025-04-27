@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.commande.AjouterCommandeController"
+      spacing="10">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Ajouter une Commande" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Client :" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="clientComboBox" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+
+        <Label text="Produit :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="produitComboBox" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+        <Label text="Quantité :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <Spinner fx:id="quantiteSpinner" min="1" max="100" initialValue="1" 
+                 GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+        <Button text="Ajouter Ligne" onAction="#handleAjouterLigne" 
+                GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <TableView fx:id="lignesTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="produitColumn" text="Produit" prefWidth="200"/>
+            <TableColumn fx:id="quantiteColumn" text="Quantité" prefWidth="100"/>
+            <TableColumn fx:id="prixUnitaireColumn" text="Prix Unitaire" prefWidth="100"/>
+            <TableColumn fx:id="sousTotalColumn" text="Sous-Total" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <Label fx:id="totalLabel" style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button fx:id="commanderButton" text="Commander" onAction="#handleAjouterCommande"/>
+        <Button text="Retour" onAction="#retourMenuCommandes"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red; -fx-wrap-text: true;"/>
+</VBox>

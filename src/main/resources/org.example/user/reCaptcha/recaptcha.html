@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>reCAPTCHA v3</title>
+    <script src="https://www.google.com/recaptcha/api.js?render=6LfDeR8rAAAAAPU5mO98CRUXYsXjs2EpyJXy1YFu"></script>
+    <script>
+        function sendTokenToJava(token) {
+            if (typeof javaApp !== 'undefined' && javaApp.receiveToken) {
+                javaApp.receiveToken(token);
+            } else {
+                console.error("javaApp.receiveToken is not available.");
+            }
+        }
+
+        function executeRecaptcha() {
+            grecaptcha.ready(function() {
+                grecaptcha.execute('6LfDeR8rAAAAAPU5mO98CRUXYsXjs2EpyJXy1YFu', {action: 'login'}).then(function(token) {
+                    sendTokenToJava(token);
+                });
+            });
+        }
+
+        window.onload = executeRecaptcha;
+    </script>
+
+</head>
+<body>
+<h3>Analyse de sécurité invisible en cours...</h3>
+</body>
+</html>

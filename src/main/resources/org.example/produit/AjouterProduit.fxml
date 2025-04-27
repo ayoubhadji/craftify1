@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.produit.AjouterProduitController"
+      spacing="20">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Ajouter un Produit" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <GridPane vgap="10" hgap="10">
+        <Label text="Nom:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <TextField fx:id="nomField" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Description:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <TextArea fx:id="descriptionField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Prix:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <TextField fx:id="prixField" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Stock:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <TextField fx:id="stockField" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Image:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="4">
+            <Button text="Choisir un fichier" onAction="#handleChoisirImage"/>
+            <Label fx:id="imageFileNameLabel" text="Aucun fichier choisi"/>
+        </HBox>
+
+        <Label text="ID Artisan:" GridPane.columnIndex="0" GridPane.rowIndex="5"/>
+        <TextField fx:id="artisanIdField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+    </GridPane>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Ajouter" onAction="#handleAjouter" 
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
+        <Button text="Retour" onAction="#handleRetour" 
+                style="-fx-background-color: #757575; -fx-text-fill: white;"/>
+    </HBox>
+
+    <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
+</VBox> 

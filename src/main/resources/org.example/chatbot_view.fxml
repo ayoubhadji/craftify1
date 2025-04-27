@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox fx:id="root" prefHeight="614.0" prefWidth="747.0" spacing="10" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.ChatBotController">
+
+    <padding>
+        <Insets bottom="10" left="10" right="10" top="10" />
+    </padding>
+
+    <!-- Scroll pour afficher les messages -->
+    <ScrollPane fx:id="scrollPane" fitToWidth="true" prefHeight="500" prefWidth="400">
+        <content>
+            <VBox fx:id="messagesBox" spacing="10">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
+            </VBox>
+        </content>
+    </ScrollPane>
+
+    <!-- Boutons de choix -->
+    <HBox fx:id="buttonBar" prefHeight="37.0" prefWidth="726.0" spacing="10">
+        <padding>
+            <Insets bottom="10" left="10" right="10" top="10" />
+        </padding>
+    </HBox>
+
+    <!-- Ligne des deux boutons de contrôle -->
+    <HBox spacing="10" alignment="CENTER">
+        <Button onAction="#goHome" text="🏠 Accueil" style="-fx-background-radius: 20; -fx-padding: 8 20;"/>
+        <Button fx:id="modeButton" text="🌙 Changer Mode" style="-fx-background-radius: 20; -fx-padding: 8 20;"/>
+    </HBox>
+
+</VBox>

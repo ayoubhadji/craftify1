@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+
+<AnchorPane xmlns:fx="http://javafx.com/fxml" fx:controller="controllers.user.UserController" prefWidth="600" prefHeight="600"
+            style="-fx-background-color: #f8f8f8;">
+    <children>
+        <VBox alignment="TOP_CENTER" spacing="30"
+              AnchorPane.topAnchor="30.0" AnchorPane.leftAnchor="50.0" AnchorPane.rightAnchor="50.0">
+
+            <Label text="Mon Profil"
+                   style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
+
+            <GridPane hgap="10" vgap="10"
+                      style="-fx-background-color: #ffffff; -fx-padding: 25px; -fx-border-radius: 10px; -fx-background-radius: 10px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 10, 0, 0, 5);">
+                <columnConstraints>
+                    <ColumnConstraints halignment="RIGHT"/>
+                    <ColumnConstraints hgrow="ALWAYS"/>
+                </columnConstraints>
+
+                <Label text="Nom complet :" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+                <Label fx:id="nameLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+
+                <Label text="Email :" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+                <Label fx:id="emailLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+
+                <Label text="Code :" GridPane.rowIndex="3" GridPane.columnIndex="0"/>
+                <Label fx:id="codeLabel" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+
+                <Label text="Rôle :" GridPane.rowIndex="4" GridPane.columnIndex="0"/>
+                <Label fx:id="roleLabel" GridPane.rowIndex="4" GridPane.columnIndex="1"/>
+
+                <Label text="Sexe :" GridPane.rowIndex="5" GridPane.columnIndex="0"/>
+                <Label fx:id="sexeLabel" GridPane.rowIndex="5" GridPane.columnIndex="1"/>
+
+                <Label text="Date de Naissance :" GridPane.rowIndex="6" GridPane.columnIndex="0"/>
+                <Label fx:id="dateNaissanceLabel" GridPane.rowIndex="6" GridPane.columnIndex="1"/>
+
+                <Label text="Date d'adhésion :" GridPane.rowIndex="7" GridPane.columnIndex="0"/>
+                <Label fx:id="dateJoinLabel" GridPane.rowIndex="7" GridPane.columnIndex="1"/>
+
+                <Label text="Téléphone :" GridPane.rowIndex="8" GridPane.columnIndex="0"/>
+                <Label fx:id="telLabel" GridPane.rowIndex="8" GridPane.columnIndex="1"/>
+
+                <Label text="Adresse :" GridPane.rowIndex="9" GridPane.columnIndex="0"/>
+                <Label fx:id="addressLabel" GridPane.rowIndex="9" GridPane.columnIndex="1"/>
+
+
+            </GridPane>
+
+            <Button fx:id="backButton" text="Retour à l'accueil"
+                    style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 8px; -fx-padding: 8px 20px;" />
+            <Button fx:id="updateButton" text="Mettre à jour"
+                    style="-fx-background-color: #2ecc71; -fx-text-fill: white; -fx-font-size: 14px; -fx-background-radius: 8px; -fx-padding: 8px 20px;" />
+
+
+        </VBox>
+    </children>
+</AnchorPane>

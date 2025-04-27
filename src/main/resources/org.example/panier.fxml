@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="707.0" prefWidth="1097.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.PanierController">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #1e1e1e;">
+            <Label prefHeight="30.0" prefWidth="107.0" style="-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;" text="🏠 Craftify">
+                <font>
+                    <Font name="Segoe UI Bold" size="20.0" />
+                </font>
+            </Label>
+            <Button onAction="#goHome" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Accueil" />
+            <Button onAction="#goToPanier" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: #00adb5; -fx-text-fill: #ffffff; -fx-background-radius: 8;" text="🛒 Panier" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="CENTER" prefHeight="485.0" prefWidth="900.0" spacing="30" style="-fx-padding: 50;">
+            <Label style="-fx-font-size: 24px; -fx-text-fill: #f0f0f0; -fx-font-weight: bold;" text="Votre Panier 🛒" />
+            <VBox id="panierItems" spacing="20" style="-fx-padding: 20;">
+                <!-- Les éléments du panier seront ajoutés dynamiquement ici -->
+            </VBox>
+            <HBox spacing="20" alignment="CENTER">
+                <Label style="-fx-font-size: 18px; -fx-text-fill: #f0f0f0;" text="Total: " />
+                <Label id="totalLabel" style="-fx-font-size: 18px; -fx-text-fill: #00adb5; -fx-font-weight: bold;" text="0.00 DT" />
+            </HBox>
+            <Button onAction="#commander" prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #00adb5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 8;" text="Commander" />
+        </VBox>
+    </center>
+
+    <bottom>
+        <VBox prefHeight="90.0" prefWidth="1098.0" style="-fx-background-color: #1e1e1e; -fx-padding: 10;">
+            <Separator style="-fx-background-color: #333333;" />
+            <HBox alignment="CENTER" spacing="20">
+                <Label prefHeight="18.0" prefWidth="119.0" style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="📍 Djerba, Tunisie" />
+                <Label prefHeight="26.0" prefWidth="134.0" style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="📞 +216 52733276" />
+                <Label prefHeight="18.0" prefWidth="155.0" style="-fx-text-fill: #888888; -fx-font-size: 12px;" text="✉ contact@craftify.com" />
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="0.0" prefWidth="879.0">
+                <Label prefHeight="29.0" prefWidth="179.0" style="-fx-text-fill: #555555; -fx-font-size: 11px; -fx-padding: 5 0 0 0;" text="© 2025 Craftify. Tous droits réservés." />
+            </HBox>
+        </VBox>
+    </bottom>
+</BorderPane> 
