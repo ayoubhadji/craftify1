@@ -79,7 +79,7 @@ public class EvenementController {
     @FXML
     private void handleAjouter() {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/AjouterEvenement.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -109,7 +109,7 @@ public class EvenementController {
         }
 
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierEvenement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/ModifierEvenement.fxml"));
             Parent root = loader.load();
 
             ModifierEvenementController controller = loader.getController();

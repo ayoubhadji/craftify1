@@ -15,6 +15,7 @@ import tn.esprit.services.ServiceEvenement;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 public class AfficherEvenementController implements Initializable {
@@ -25,37 +26,42 @@ public class AfficherEvenementController implements Initializable {
     @FXML
     private TextField searchField;
 
+    @FXML
+    private TabPane mainTabPane;
+
     private final ServiceEvenement serviceEvenement = new ServiceEvenement();
     private ObservableList<Evenement> evenementList = FXCollections.observableArrayList();
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         setupListView();
         loadEvenementData();
-        //setupSearchListener();
+        setupSearchListener();
     }
 
     private void setupListView() {
-        evenementListView.setCellFactory(listView -> {
-            try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/EvenementCell.fxml"));
-                Parent cell = loader.load();
-                EvenementCellController controller = loader.getController();
-                return new ListCell<Evenement>() {
-                    @Override
-                    protected void updateItem(Evenement evenement, boolean empty) {
-                        super.updateItem(evenement, empty);
-                        if (empty || evenement == null) {
-                            setGraphic(null);
-                        } else {
-                            controller.setEvenement(evenement);
-                            setGraphic(cell);
-                        }
-                    }
-                };
-            } catch (IOException e) {
-                e.printStackTrace();
-                return new ListCell<>();
+        evenementListView.setCellFactory(listView -> new ListCell<Evenement>() {
+            @Override
+            protected void updateItem(Evenement evenement, boolean empty) {
+                super.updateItem(evenement, empty);
+                if (empty || evenement == null) {
+                    setText(null);
+                    setStyle("");
+                } else {
+                    // Format the display text with event details
+                    String displayText = String.format("Nom: %s | Lieu: %s | Type: %s | Date: %s - %s | Prix: %.2f DT",
+                            evenement.getNom(),
+                            evenement.getLieu(),
+                            evenement.getTypeEvenement(),
+                            evenement.getDateDebut().format(dateFormatter),
+                            evenement.getDateFin().format(dateFormatter),
+                            evenement.getPrix());
+                    setText(displayText);
+
+                    // Add some styling
+                    setStyle("-fx-font-size: 14px; -fx-padding: 5px;");
+                }
             }
         });
     }
@@ -65,7 +71,7 @@ public class AfficherEvenementController implements Initializable {
         evenementList.addAll(serviceEvenement.afficher());
         evenementListView.setItems(evenementList);
     }
-/*
+
     private void setupSearchListener() {
         searchField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue == null || newValue.isEmpty()) {
@@ -83,7 +89,7 @@ public class AfficherEvenementController implements Initializable {
             }
         });
     }
-*/
+
     @FXML
     void handleSupprimer(ActionEvent event) {
         Evenement selectedEvenement = evenementListView.getSelectionModel().getSelectedItem();
@@ -107,7 +113,7 @@ public class AfficherEvenementController implements Initializable {
         Evenement selectedEvenement = evenementListView.getSelectionModel().getSelectedItem();
         if (selectedEvenement != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/ModifierEvenement.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/ModifierEvenement.fxml"));
                 Parent root = loader.load();
                 ModifierEvenementController controller = loader.getController();
                 controller.initData(selectedEvenement);
@@ -128,7 +134,7 @@ public class AfficherEvenementController implements Initializable {
     @FXML
     void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/AjouterEvenement.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/AjouterEvenement.fxml"));
             Parent root = loader.load();
 
             Stage stage = new Stage();
@@ -146,7 +152,7 @@ public class AfficherEvenementController implements Initializable {
         Evenement selectedEvenement = evenementListView.getSelectionModel().getSelectedItem();
         if (selectedEvenement != null) {
             try {
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/DetailsEvenement.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/DetailsEvenement.fxml"));
                 Parent root = loader.load();
                 DetailsEvenementController controller = loader.getController();
                 controller.setEvenement(selectedEvenement);
@@ -160,6 +166,18 @@ public class AfficherEvenementController implements Initializable {
             }
         } else {
             showAlert("Aucun événement sélectionné", "Veuillez sélectionner un événement pour voir les détails.");
+        }
+    }
+
+    @FXML
+    private void handleVoirParticipations() {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/yasmine/AfficherParticipation.fxml"));
+            Parent root = loader.load();
+            Stage stage = (Stage) mainTabPane.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
