@@ -1,0 +1,129 @@
+.main-gradient-bg {
+    -fx-background-color: linear-gradient(to bottom right, #fff, #a0522d, #fff8f0, #8b5c2b);
+    -fx-padding: 30px 0 30px 0;
+    min-height: 100vh;
+}
+
+.header-bar {
+    -fx-padding: 10px 30px 10px 30px;
+    -fx-background-color: rgba(255,255,255,0.85);
+    -fx-background-radius: 12px;
+    -fx-effect: dropshadow(gaussian, #a0522d, 10, 0.2, 0, 2);
+}
+
+.main-title {
+    -fx-font-size: 28px;
+    -fx-font-family: "Brush Script MT", cursive, "Segoe Script", sans-serif;
+    -fx-font-weight: bold;
+    -fx-text-fill: #6b3e26;
+    -fx-effect: dropshadow(gaussian, #fff8f0, 5, 0.5, 0, 1);
+}
+
+.add-btn {
+    -fx-background-color: linear-gradient(to right, #a0522d, #fff8f0);
+    -fx-text-fill: #fff;
+    -fx-font-weight: bold;
+    -fx-background-radius: 20px;
+    -fx-padding: 8px 24px;
+    -fx-effect: dropshadow(gaussian, #8b5c2b, 5, 0.2, 0, 2);
+}
+
+.add-btn:hover {
+    -fx-background-color: linear-gradient(to right, #fff8f0, #a0522d);
+    -fx-text-fill: #6b3e26;
+}
+
+.foire-list {
+    -fx-background-color: transparent;
+    -fx-padding: 0 30px 0 30px;
+}
+
+.list-cell {
+    -fx-background-color: rgba(255,255,255,0.98);
+    -fx-background-radius: 16px;
+    -fx-padding: 18px 24px;
+    -fx-border-color: #a0522d;
+    -fx-border-width: 2px;
+    -fx-border-radius: 16px;
+    -fx-effect: dropshadow(gaussian, #8b5c2b, 8, 0.15, 0, 2);
+    -fx-font-size: 15px;
+    -fx-font-family: "Segoe UI", "Arial", sans-serif;
+    -fx-text-fill: #3e2723;
+    -fx-margin-bottom: 12px;
+    -fx-transition: all 0.2s;
+}
+
+.list-cell:filled:selected, .list-cell:filled:hover {
+    -fx-background-color: linear-gradient(to right, #fff8f0, #a0522d);
+    -fx-text-fill: #3e2723;
+    -fx-border-color: #8b5c2b;
+}
+
+.card-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a0522d;
+}
+
+.card-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: #8b5c2b;
+}
+
+.card-value {
+    -fx-font-size: 15px;
+    -fx-text-fill: #3e2723;
+    -fx-font-weight: bold;
+}
+
+.card-btn {
+    -fx-background-color: #a0522d;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 12px;
+    -fx-padding: 6px 16px;
+    -fx-font-size: 13px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #8b5c2b, 3, 0.1, 0, 1);
+}
+
+.card-btn:hover {
+    -fx-background-color: #fff8f0;
+    -fx-text-fill: #a0522d;
+}
+
+.header {
+    -fx-font-size: 22px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #a0522d;
+    -fx-padding: 0 0 10px 0;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-text-fill: #8b5c2b;
+    -fx-font-weight: bold;
+}
+
+.form-field {
+    -fx-background-color: #fff;
+    -fx-border-color: #a0522d;
+    -fx-border-radius: 8px;
+    -fx-padding: 6px 10px;
+    -fx-font-size: 14px;
+    -fx-text-fill: #3e2723;
+}
+
+.form-btn {
+    -fx-background-color: #a0522d;
+    -fx-text-fill: #fff;
+    -fx-background-radius: 12px;
+    -fx-padding: 8px 24px;
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, #8b5c2b, 3, 0.1, 0, 1);
+}
+
+.form-btn:hover {
+    -fx-background-color: #fff8f0;
+    -fx-text-fill: #a0522d;
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainVBox" stylesheets="@styles.css" spacing="20" alignment="TOP_CENTER"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.pidev2.controllers.ViewItemsController"
+      styleClass="main-gradient-bg"
+      prefWidth="900.0" prefHeight="650.0">
+    <HBox spacing="10" alignment="CENTER" styleClass="header-bar" style="-fx-padding: 20 0 10 0;">
+        <Button text="Foire list" onAction="#handleGoToFoireList" styleClass="add-btn"/>
+        <Label text="Liste des Slider Items" styleClass="main-title"/>
+        <Pane HBox.hgrow="ALWAYS"/>
+        <Button text="Ajouter un Item" onAction="#handleAddItem" styleClass="add-btn"/>
+    </HBox>
+    <HBox alignment="CENTER" VBox.vgrow="ALWAYS">
+        <VBox alignment="TOP_CENTER" spacing="10" style="-fx-background-color: rgba(255,255,255,0.85); -fx-background-radius: 15; -fx-padding: 30; -fx-effect: dropshadow(gaussian, #bdbdbd, 8, 0.2, 0, 2);" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+            <ListView fx:id="itemListView"
+                      style="-fx-background-color:transparent; -fx-padding:0; -fx-pref-width: 670; -fx-max-width: 700;"
+                      VBox.vgrow="ALWAYS"
+                      HBox.hgrow="NEVER"/>
+            <HBox spacing="10" alignment="CENTER" style="-fx-padding: 10 0 0 0;">
+                <Button text="Modifier" onAction="#handleModifyItem" styleClass="form-btn"/>
+                <Button text="Supprimer" onAction="#handleDeleteItem" styleClass="form-btn"/>
+            </HBox>
+        </VBox>
+    </HBox>
+</VBox>

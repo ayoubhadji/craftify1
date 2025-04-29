@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainVBox" stylesheets="@styles.css" spacing="10" alignment="TOP_CENTER"
+      prefWidth="900.0" prefHeight="650.0"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="com.example.pidev2.controllers.ViewFoire2Controller"
+      styleClass="main-gradient-bg">
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
+        <Label text="Liste des Foires" styleClass="main-title"/>
+    </HBox>
+    <ListView fx:id="foireListView" style="-fx-background-color:transparent; -fx-padding:0;" VBox.vgrow="ALWAYS"/>
+</VBox>
