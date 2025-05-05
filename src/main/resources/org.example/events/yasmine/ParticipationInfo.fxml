@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.ParticipationInfoController"
+      spacing="10">
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+
+    <VBox spacing="10">
+        <Label text="Détails de la Participation" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+        
+        <GridPane vgap="10" hgap="10">
+            <Label text="Événement:" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+            <Label fx:id="evenementLabel" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            
+            <Label text="Prix:" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+            <Label fx:id="prixLabel" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            
+            <Label text="Statut:" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+            <Label fx:id="statutLabel" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+
+        <HBox spacing="10">
+            <Button text="Retour" onAction="#handleRetour"/>
+        </HBox>
+    </VBox>
+</VBox> 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.DetailsEvenementController"
+      spacing="10" prefWidth="400" prefHeight="600">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <ImageView fx:id="imageView" fitWidth="360" fitHeight="200" preserveRatio="true"/>
+
+    <Label fx:id="nomLabel" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+    
+    <ScrollPane VBox.vgrow="ALWAYS" fitToWidth="true">
+        <VBox spacing="10">
+            <Label fx:id="descriptionLabel" wrapText="true"/>
+            <Label fx:id="dateDebutLabel"/>
+            <Label fx:id="dateFinLabel"/>
+            <Label fx:id="lieuLabel"/>
+            <Label fx:id="capaciteLabel"/>
+            <Label fx:id="typeLabel"/>
+            <Label fx:id="prixLabel"/>
+            <Label fx:id="organisateurLabel"/>
+        </VBox>
+    </ScrollPane>
+</VBox> 

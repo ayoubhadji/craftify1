@@ -1,6 +1,7 @@
 package controllers.payment;
 
 import com.stripe.exception.StripeException;
+import entity.Commande;
 import entity.Panier;
 import javafx.application.Platform;
 import javafx.concurrent.Worker;
@@ -18,6 +19,11 @@ import javafx.animation.PauseTransition;
 import javafx.util.Duration;
 import netscape.javascript.JSObject;
 import services.payment.StripePaymentService;
+import services.commande.CommandeService;
+import services.commande.CommandeServiceImpl;
+import controllers.commande.DetailsCommandeController;
+
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -32,92 +38,93 @@ public class StripePaymentController {
     @FXML
     private Button payButton;
 
+    @FXML
+    private Button voirCommandeButton;
+
     private double amount;
-    private String clientSecret;
     private List<Panier> panierItems;
     private StripePaymentService stripeService;
     private WebEngine webEngine;
+    private boolean stripeReady = false;
+    private Commande currentCommande;
+    private final CommandeService commandeService = new CommandeServiceImpl();
 
     @FXML
     public void initialize() {
         stripeService = new StripePaymentService();
         webEngine = cardElement.getEngine();
 
-        // Log pour le débogage
         System.out.println("Initialisation du contrôleur de paiement");
+        
+        // Désactiver le bouton de paiement jusqu'à ce que Stripe soit prêt
+        payButton.setDisable(true);
+        statusLabel.setText("Initialisation du formulaire de paiement...");
 
-        // Load the Stripe Elements HTML
         String url = getClass().getResource("/org.example/payment/stripe-elements.html").toExternalForm();
         System.out.println("Chargement de l'URL: " + url);
         webEngine.load(url);
 
-        // Wait for the page to load
         webEngine.getLoadWorker().stateProperty().addListener((obs, oldState, newState) -> {
             if (newState == Worker.State.SUCCEEDED) {
                 System.out.println("Page web chargée avec succès");
 
-                // Add the JavaScript interface
-                JSObject window = (JSObject) webEngine.executeScript("window");
-                PaymentCallback callback = new PaymentCallback(this);  // Pass controller instance
-                window.setMember("paymentCallback", callback);  // This is where the PaymentCallback is registered
-
-                System.out.println("Interface JavaScript enregistrée");
-
-                // Initialize Stripe with the public key and client secret
-                if (clientSecret != null) {
-                    System.out.println("Initialisation des éléments Stripe avec clientSecret");
-                    initializeStripeElements();
-                } else {
-                    System.out.println("Pas de clientSecret disponible pour l'instant");
-                }
+                // Ajouter un délai pour s'assurer que la page est complètement chargée
+                PauseTransition delay = new PauseTransition(Duration.seconds(1));
+                delay.setOnFinished(event -> {
+                    JSObject window = (JSObject) webEngine.executeScript("window");
+                    window.setMember("paymentCallback", new PaymentCallback(this));
+                    System.out.println("Interface JavaScript enregistrée");
+                    initializeStripe();
+                });
+                delay.play();
             }
         });
+
+        // Le bouton "Voir Commande" est toujours disponible
+        if (voirCommandeButton != null) {
+            voirCommandeButton.setDisable(false);
+        }
     }
 
-    private void initializeStripeElements() {
+    private void initializeStripe() {
         try {
-            if (clientSecret == null) {
-                handleError("Client secret is missing!");
-                return;
-            }
-
             Map<String, String> setupData = stripeService.createSetupIntent();
+            String publicKey = setupData.get("public_key");
+            System.out.println("Clé publique récupérée: " + publicKey);
+            
             String script = String.format(
-                    "window.postMessage({type: 'stripeInit', publicKey: '%s', clientSecret: '%s'}, '*');",
-                    setupData.get("public_key"),
-                    clientSecret
+                    "window.postMessage({type: 'stripeInit', publicKey: '%s'}, '*');",
+                    publicKey
             );
+            System.out.println("Exécution du script d'initialisation");
             webEngine.executeScript(script);
         } catch (StripeException e) {
-            handleError("Erreur d'initialisation Stripe: " + e.getMessage());
+            System.err.println("Erreur lors de l'initialisation de Stripe: " + e.getMessage());
+            handleError("Erreur d'initialisation: " + e.getMessage());
         }
     }
 
     public void setAmount(double amount) {
         this.amount = amount;
-        try {
-            clientSecret = stripeService.createPaymentIntent(amount, "eur");
             Platform.runLater(() -> {
                 if (statusLabel != null) {
                     statusLabel.setText(String.format("Montant à payer: %.2f €", amount));
                 }
-                if (webEngine != null && webEngine.getLoadWorker().getState() == Worker.State.SUCCEEDED) {
-                    initializeStripeElements();
-                }
             });
-        } catch (StripeException e) {
-            handleError("Erreur lors de la création du paiement: " + e.getMessage());
-        }
     }
 
     public void setPanierItems(List<Panier> items) {
         this.panierItems = items;
     }
 
+    public void setCommande(Commande commande) {
+        this.currentCommande = commande;
+    }
+
     @FXML
     private void handlePayment() {
-        if (clientSecret == null) {
-            handleError("Erreur: Paiement non initialisé");
+        if (!stripeReady) {
+            handleError("Le formulaire n'est pas encore prêt. Veuillez patienter...");
             return;
         }
 
@@ -127,11 +134,14 @@ public class StripePaymentController {
             statusLabel.setText("Traitement du paiement en cours...");
             statusLabel.setStyle("-fx-text-fill: black;");
 
-            // Appel de la nouvelle fonction JavaScript
-            System.out.println("Appel de la fonction startPayment");
-            webEngine.executeScript("window.startPayment()");
+            // Simuler le paiement
+            if (stripeService.simulatePayment(amount, "eur")) {
+                handleSuccess();
+            } else {
+                handleError("Le paiement a échoué");
+            }
         } catch (Exception e) {
-            System.err.println("Erreur lors du déclenchement du paiement: " + e.getMessage());
+            System.err.println("Erreur lors du paiement: " + e.getMessage());
             e.printStackTrace();
             handleError("Erreur technique: " + e.getMessage());
             payButton.setDisable(false);
@@ -153,57 +163,94 @@ public class StripePaymentController {
             statusLabel.setText("Paiement réussi !");
             statusLabel.setStyle("-fx-text-fill: green;");
             payButton.setDisable(true);
+            
+            if (currentCommande != null) {
+                currentCommande.setStatut("PAYEE");
+                commandeService.update(currentCommande);
+            }
 
             if (panierItems != null) {
                 panierItems.clear();
             }
 
-            PauseTransition pauseTransition = new PauseTransition(Duration.seconds(2));
-            pauseTransition.setOnFinished(e -> {
-                Stage stage = (Stage) payButton.getScene().getWindow();
+            // Attendre 2 secondes avant de fermer la fenêtre
+            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            delay.setOnFinished(event -> {
+                Stage stage = (Stage) statusLabel.getScene().getWindow();
                 stage.close();
             });
-            pauseTransition.play();
+            delay.play();
         });
     }
 
     @FXML
     private void cancelPayment() {
+        if (currentCommande != null) {
+            currentCommande.setStatut("ANNULEE");
+            commandeService.update(currentCommande);
+        }
         Stage stage = (Stage) payButton.getScene().getWindow();
         stage.close();
     }
 
-    public void retourhome(ActionEvent event) {
-        loadScene(event, "/org.example/home.fxml", "Accueil");
-    }
-
-    private void loadScene(ActionEvent event, String fxmlPath, String title) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource(fxmlPath));
-            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle(title);
-            stage.show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void handlePaymentCallback(String status, String message) {
-        if ("info".equals(status)) {
-            System.out.println("Information reçue : " + message);
+    @FXML
+    private void voirDetailsCommande() {
+        System.out.println("Clic sur le bouton Voir Commande");
+        if (currentCommande == null) {
+            System.err.println("Erreur : currentCommande est null");
+            statusLabel.setText("Erreur : Impossible de trouver la commande");
             return;
         }
+        
+        System.out.println("Affichage des détails de la commande #" + currentCommande.getId());
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/commande/DetailsCommande.fxml"));
+            Parent root = loader.load();
 
-        if ("succeeded".equals(status)) {
-            System.out.println("Paiement réussi !");
-            handleSuccess(); // <<< ici on déclenche ton succès visuellement
-        } else if ("failed".equals(status)) {
-            System.out.println("Paiement échoué : " + message);
-            handleError(message); // <<< ici on déclenche ton affichage d'erreur
-        } else {
-            System.out.println("Statut de paiement inconnu : " + status);
+            DetailsCommandeController detailsController = loader.getController();
+            detailsController.setCommande(currentCommande);
+
+            Stage stage = (Stage) voirCommandeButton.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Détails de la commande #" + currentCommande.getId());
+            System.out.println("Navigation vers l'interface des détails réussie");
+        } catch (IOException e) {
+            System.err.println("Erreur lors de l'affichage des détails : " + e.getMessage());
+            e.printStackTrace();
+            statusLabel.setText("Erreur lors de l'affichage des détails");
         }
     }
 
+    public void retourhome(ActionEvent event) {
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/org.example/home.fxml"));
+            Stage stage = (Stage) ((javafx.scene.Node) event.getSource()).getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Accueil");
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+            handleError("Erreur lors du retour à l'accueil");
+        }
+    }
+
+    public void handlePaymentCallback(String type, String message) {
+        System.out.println("Message reçu -> Type: " + type + ", Message: " + message);
+
+        if ("info".equals(type)) {
+            if (message.contains("Stripe prêt")) {
+                stripeReady = true;
+                payButton.setDisable(false);
+                statusLabel.setText("Formulaire prêt pour le paiement");
+                statusLabel.setStyle("-fx-text-fill: green;");
+                System.out.println("Formulaire prêt pour le paiement.");
+            }
+        } else if ("success".equals(type)) {
+            System.out.println("🎉 Paiement réussi !");
+            handleSuccess();
+        } else if ("error".equals(type)) {
+            System.err.println("Erreur : " + message);
+            handleError(message);
+        }
+    }
 }

@@ -1,7 +1,7 @@
 package services.produit;
 
 import entity.Produit;
-import utils.DataSource;
+import utils.MyDataBase;
 import java.sql.*;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -12,15 +12,21 @@ public class ProduitServiceImpl implements ProduitService {
     private PreparedStatement pst;
 
     public ProduitServiceImpl() {
-        conn = DataSource.getInstance().getCnx();
+        conn = MyDataBase.getInstance().getMyConnection();
     }
 
     @Override
     public List<Produit> getAllProduits() {
+        return getProduitsPagines(0, Integer.MAX_VALUE);
+    }
+
+    public List<Produit> getProduitsPagines(int offset, int limit) {
         List<Produit> produits = new ArrayList<>();
-        String req = "SELECT * FROM produit";
+        String req = "SELECT * FROM produit LIMIT ? OFFSET ?";
         try {
             pst = conn.prepareStatement(req);
+            pst.setInt(1, limit);
+            pst.setInt(2, offset);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
                 Produit produit = new Produit();
@@ -41,6 +47,20 @@ public class ProduitServiceImpl implements ProduitService {
             System.out.println(e.getMessage());
         }
         return produits;
+    }
+
+    public int getTotalProduits() {
+        String req = "SELECT COUNT(*) FROM produit";
+        try {
+            pst = conn.prepareStatement(req);
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 
     @Override

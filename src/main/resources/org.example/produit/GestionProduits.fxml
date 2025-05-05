@@ -36,4 +36,4 @@
     </HBox>
 
     <Label fx:id="messageLabel" style="-fx-text-fill: red;"/>
-</VBox> 
+</VBox>

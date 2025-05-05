@@ -125,4 +125,15 @@ public class ModifierProduitController {
         stockField.clear();
         imageUrlField.clear();
     }
+
+    public void setProduit(Produit produit) {
+        if (produit != null) {
+            idField.setText(String.valueOf(produit.getId()));
+            nomField.setText(produit.getNom());
+            descriptionField.setText(produit.getDescription());
+            prixField.setText(String.valueOf(produit.getPrix()));
+            stockField.setText(String.valueOf(produit.getStock()));
+            imageUrlField.setText(produit.getImageUrl());
+        }
+    }
 } 

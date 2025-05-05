@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.commande.DetailsCommandeController"
+      spacing="10" alignment="CENTER">
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Détails de la Commande" style="-fx-font-size: 24px; -fx-font-weight: bold;"/>
+
+    <GridPane hgap="10" vgap="10">
+        <Label text="Numéro de commande:" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+        <Label fx:id="numeroCommandeLabel" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+        <Label text="Date:" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+        <Label fx:id="dateLabel" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+        <Label text="Client:" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+        <Label fx:id="clientLabel" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+
+        <Label text="Statut:" GridPane.columnIndex="0" GridPane.rowIndex="3"/>
+        <Label fx:id="statutLabel" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+
+        <Label text="Total:" GridPane.columnIndex="0" GridPane.rowIndex="4"/>
+        <Label fx:id="totalLabel" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+    </GridPane>
+
+    <TableView fx:id="detailsTable" VBox.vgrow="ALWAYS">
+        <columns>
+            <TableColumn fx:id="produitColumn" text="Produit" prefWidth="200"/>
+            <TableColumn fx:id="quantiteColumn" text="Quantité" prefWidth="100"/>
+            <TableColumn fx:id="prixUnitaireColumn" text="Prix unitaire" prefWidth="100"/>
+            <TableColumn fx:id="totalLigneColumn" text="Total" prefWidth="100"/>
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Imprimer" onAction="#handleImprimer"/>
+        <Button text="Retour" onAction="#handleRetour"/>
+    </HBox>
+</VBox>

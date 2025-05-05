@@ -1,7 +1,7 @@
 package controllers.produit;
 
-import entity.Produit;
 import entity.Panier;
+import entity.Produit;
 import entity.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,7 +29,6 @@ import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
 import controllers.payment.StripePaymentController;
-import services.payment.StripePaymentService;
 import utils.Session;
 
 import java.io.IOException;
@@ -250,7 +249,7 @@ public class AfficherProduitFrontController {
         if (currentUser == null) {
             messageLabel.setText("❌ Veuillez vous connecter pour ajouter au panier");
             messageLabel.setStyle("-fx-text-fill: red; -fx-font-size: 14px;");
-            
+
             // Rediriger vers la page de connexion après 2 secondes
             PauseTransition pause = new PauseTransition(Duration.seconds(2));
             pause.setOnFinished(e -> {
@@ -298,7 +297,7 @@ public class AfficherProduitFrontController {
             }
 
             updatePanier();
-            
+
             // Afficher un message de succès
             messageLabel.setText("✅ Produit ajouté au panier");
             messageLabel.setStyle("-fx-text-fill: #00ff00; -fx-font-size: 14px;");
@@ -497,16 +496,21 @@ public class AfficherProduitFrontController {
     }
 
     @FXML
-    private void logout() {
+    private void logout(ActionEvent event) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/org.example/login.fxml"));
             Parent root = loader.load();
-            Stage stage = (Stage) produitsContainer.getScene().getWindow();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle("Connexion");
             stage.setScene(new Scene(root));
             stage.show();
         } catch (IOException e) {
-            e.printStackTrace();
+            showError("Erreur de navigation", "Impossible de retourner à la page de connexion");
         }
+    }
+
+    private void showError(String erreurDeNavigation, String s) {
+
     }
 
     @FXML

@@ -19,11 +19,11 @@ import services.commande.CommandeServiceImpl;
 import services.payment.StripePaymentService;
 import controllers.payment.StripePaymentController;
 
-
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
+import java.util.Map;
 
 public class AjouterCommandeController implements Initializable {
 
@@ -36,6 +36,7 @@ public class AjouterCommandeController implements Initializable {
     private final CommandeService commandeService = new CommandeServiceImpl();
     private final UserDAO userDAO = new UserDAO();
     private final StripePaymentService stripeService = new StripePaymentService();
+    private Commande currentCommande;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -82,18 +83,19 @@ public class AjouterCommandeController implements Initializable {
             System.out.println("Création de l'intention de paiement pour " + total + "€");
 
             // Créer l'intention de paiement Stripe
-            String clientSecret = stripeService.createPaymentIntent(total, "eur");
+            Map<String, String> paymentIntent = stripeService.createPaymentIntent(total, "eur");
+            String clientSecret = paymentIntent.get("client_secret");
             System.out.println("Intention de paiement créée avec succès. Secret: " + clientSecret);
             messageLabel.setText("Paiement créé, ouverture du formulaire...");
 
             // Sauvegarder la commande
-            Commande commande = new Commande();
-            commande.setIdClient(client.getId());
-            commande.setDateCommande(LocalDateTime.now());
-            commande.setStatut("EN_ATTENTE");
-            commande.setTotal(total);
-            commandeService.save(commande);
-            System.out.println("Commande sauvegardée avec succès");
+            currentCommande = new Commande();
+            currentCommande.setIdClient(client.getId());
+            currentCommande.setDateCommande(LocalDateTime.now());
+            currentCommande.setStatut("EN_ATTENTE");
+            currentCommande.setTotal(total);
+            commandeService.save(currentCommande);
+            System.out.println("Commande sauvegardée avec succès, ID: " + currentCommande.getId());
 
             // Ouvrir le formulaire de paiement
             Platform.runLater(() -> {
@@ -103,17 +105,12 @@ public class AjouterCommandeController implements Initializable {
 
                     StripePaymentController paymentController = loader.getController();
                     paymentController.setAmount(total);
+                    paymentController.setCommande(currentCommande); // Passer la commande au contrôleur de paiement
 
                     Stage paymentStage = new Stage();
                     paymentStage.initModality(Modality.APPLICATION_MODAL);
                     paymentStage.setTitle("Paiement sécurisé");
                     paymentStage.setScene(new Scene(root));
-
-                    // Gestionnaire de fermeture
-                    paymentStage.setOnHiding(event -> {
-                        System.out.println("Fenêtre de paiement fermée");
-                        messageLabel.setText("Paiement terminé");
-                    });
 
                     paymentStage.show();
                     System.out.println("Fenêtre de paiement affichée");

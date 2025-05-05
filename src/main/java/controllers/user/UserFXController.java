@@ -79,12 +79,12 @@ public class UserFXController {
         telCol.setCellValueFactory(new PropertyValueFactory<>("tel"));
         addressCol.setCellValueFactory(new PropertyValueFactory<>("address"));
 
-        // ⬇️ Activer le tri sur certaines colonnes
+
         idCol.setSortable(true);
         nomCol.setSortable(true);
         emailCol.setSortable(true);
 
-        pagination.setPageFactory(this::createPage); // 👈 pagination magic
+        pagination.setPageFactory(this::createPage);
         updateGenderChart();
     }
     private Node createPage(int pageIndex) {

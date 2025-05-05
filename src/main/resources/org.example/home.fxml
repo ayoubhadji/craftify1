@@ -3,12 +3,15 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.layout.StackPane?>
 <BorderPane prefHeight="707.0" prefWidth="1097.0" style="-fx-background-color: #121212;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.HomeController">
 
     <!-- Barre de navigation (haut) -->
@@ -20,10 +23,10 @@
                 </font>
             </Label>
             <Button onAction="#goHome" prefHeight="26.0" prefWidth="98.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Accueil" />
-            <Button onAction="#goHome" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="foire" />
-         <Button onAction="#goHome" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="evenement" />
+            <Button onAction="#gotofoire" prefHeight="26.0" prefWidth="108.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="foire" />
+         <Button onAction="#gotoevents" prefHeight="26.0" prefWidth="117.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="evenement" />
          <Button onAction="#goprudect" prefHeight="26.0" prefWidth="97.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="produit" />
-         <Button onAction="#goHome" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="blog" />
+         <Button onAction="#gopost" prefHeight="26.0" prefWidth="122.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="blog" />
          <Button onAction="#goHome" prefHeight="26.0" prefWidth="121.0" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="meriam" />
             <Button onAction="#goToProfile" prefHeight="26.0" prefWidth="92.0" style="-fx-background-color: #2c2c2c; -fx-text-fill: #00adb5; -fx-background-radius: 8;" text="👤 Profil" />
             <Button onAction="#logout" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;" text="🚪 Déconnexion" />
@@ -32,15 +35,32 @@
 
     <!-- Contenu principal -->
     <center>
-        <VBox alignment="CENTER" prefHeight="523.0" prefWidth="1098.0" spacing="30" style="-fx-padding: 50;">
-            <Label style="-fx-font-size: 24px; -fx-text-fill: #f0f0f0; -fx-font-weight: bold;" text="Bienvenue sur le FrontOffice ! 🎨" />
-         <AnchorPane prefHeight="380.0" prefWidth="997.0">
-            <children>
-                  <Button layoutX="14.0" layoutY="339.0" onAction="#chatbot" prefHeight="50" prefWidth="174.0" style="-fx-background-color: #00adb5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;" text="Parler au Chatbot 🤖" />
-            </children>
-         </AnchorPane>
-        </VBox>
+        <StackPane prefHeight="523.0" prefWidth="1098.0">
+            <!-- Image en arrière-plan -->
+            <ImageView fitHeight="523.0" fitWidth="1098.0" preserveRatio="false" opacity="0.35">
+                <image>
+                    <Image url="@galaria.jpg" />
+                </image>
+            </ImageView>
+
+            <!-- Contenu au-dessus de l'image -->
+            <VBox alignment="CENTER" spacing="30">
+                <Label style="-fx-font-size: 24px; -fx-text-fill: #f0f0f0; -fx-font-weight: bold;" text="Un clic, un talent unique !!">
+                    <font>
+                        <Font name="Calibri Light" size="24.0" />
+                    </font>
+                </Label>
+
+
+            </VBox>
+            <AnchorPane>
+                <Button layoutX="20.0" layoutY="450.0" onAction="#chatbot" prefHeight="50" prefWidth="220.0"
+                        style="-fx-background-color: #00adb5; -fx-text-fill: white; -fx-font-size: 16px; -fx-background-radius: 15;"
+                        text="Parler au Chatbot 🤖" />
+            </AnchorPane>
+        </StackPane>
     </center>
+
 
     <!-- Footer -->
     <bottom>

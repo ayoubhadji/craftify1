@@ -12,10 +12,18 @@ module craftify {
     requires com.fasterxml.jackson.databind;
     requires nanohttpd;
     requires jdk.jsobject;
+    requires com.google.zxing.javase;
+    requires com.google.zxing;
+    requires javafx.swing;
+    requires jakarta.persistence;
 
     opens controllers.commande to javafx.fxml;
     opens controllers.payment to javafx.fxml;
     opens controllers.user to javafx.fxml;
+    opens controllers.blog to javafx.fxml;
+    opens controllers.events to javafx.fxml;
+    opens controllers.foire to javafx.fxml;
+
     opens controllers.produit to javafx.fxml;
     opens controllers to javafx.fxml;
     opens entity to javafx.base;
@@ -25,6 +33,9 @@ module craftify {
     exports controllers.payment;
     exports controllers.user;
     exports controllers.produit;
+    exports controllers.blog;
+    exports controllers.events;
+    exports controllers.foire;
     exports controllers;
     exports entity;
     exports tn.esprit;

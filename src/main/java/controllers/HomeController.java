@@ -22,6 +22,14 @@ public class HomeController {
     }
     public void goprudect(ActionEvent event) { loadScene(event, "/org.example/produit/AfficherProduitFront.fxml", "produit");
     }
+    public void gopost(ActionEvent event) { loadScene(event, "/org.example/blog/Post.fxml", "blog");
+    }
+    public void gotoevents(ActionEvent event) { loadScene(event, "/org.example/events/yasmine/AfficherEvenementFront.fxml", "events");
+
+    }
+    public void gotofoire(ActionEvent event) { loadScene(event, "/org.example/foire/ViewFoire2.fxml", "foire");
+    }
+
 
 
     private void loadScene(ActionEvent event, String fxmlPath, String title) {

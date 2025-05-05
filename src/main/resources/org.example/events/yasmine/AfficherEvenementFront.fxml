@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.AfficherEvenementFrontController"
+      style="-fx-background-color: #121212;">
+
+    <!-- 🌙 Barre de navigation sombre -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #1e1e1e;">
+        <Label prefHeight="30.0" prefWidth="107.0"
+               style="-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;"
+               text="🏠 Craftify" />
+        <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Accueil" />
+        <Button onAction="#gotofoire" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Foire" />
+        <Button onAction="#gotoevents" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Evénement" />
+        <Button onAction="#goprudect" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Produit" />
+        <Button onAction="#gopost" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Blog" />
+        <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Meriam" />
+        <Button onAction="#goToProfile" style="-fx-background-color: #2c2c2c; -fx-text-fill: #00adb5; -fx-background-radius: 8;" text="👤 Profil" />
+        <Button onAction="#logout" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;" text="🚪 Déconnexion" />
+    </HBox>
+
+    <!-- 💡 Padding général entre la barre de navigation et le contenu principal -->
+    <Region style="-fx-background-color: #121212; -fx-pref-height: 10px;" />
+
+    <!-- 🎯 Titre -->
+    <HBox spacing="10" alignment="CENTER">
+        <Label text="Découvrez nos Événements"
+               style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #ffffff;" />
+    </HBox>
+
+    <!-- 💡 Séparation sous le titre -->
+    <Region style="-fx-background-color: #121212; -fx-pref-height: 15px;" />
+
+    <!-- 🔎 Barre de recherche -->
+    <HBox spacing="10" alignment="CENTER" style="-fx-padding: 20;">
+        <TextField fx:id="searchField" promptText="Rechercher un événement..." prefWidth="300"
+                   style="-fx-background-radius: 20; -fx-padding: 8; -fx-background-color: #2c2c2c; -fx-text-fill: white; -fx-prompt-text-fill: #888888;" />
+    </HBox>
+
+    <!-- 💡 Séparation sous la barre de recherche -->
+    <Region style="-fx-background-color: #121212; -fx-pref-height: 10px;" />
+
+    <!-- 🧱 Grille d'événements -->
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" style="-fx-background: transparent;">
+        <GridPane fx:id="eventGrid" hgap="60" vgap="60" style="-fx-padding: 20; -fx-background-color: #2c2c2c;">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="300" prefWidth="300"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="300" prefWidth="300"/>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="300" prefWidth="300"/>
+            </columnConstraints>
+        </GridPane>
+    </ScrollPane>
+</VBox>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.EvenementCardFrontController"
+      styleClass="event-card">
+
+    <ImageView fx:id="imageView" fitWidth="260" fitHeight="150" preserveRatio="true" 
+               styleClass="event-image"/>
+
+    <Label fx:id="titleLabel" styleClass="event-title"/>
+    
+    <Label fx:id="descriptionLabel" styleClass="event-description" 
+           wrapText="true" maxWidth="260" maxHeight="60"/>
+
+    <VBox spacing="5">
+        <Label fx:id="dateLabel" styleClass="event-info"/>
+        <Label fx:id="lieuLabel" styleClass="event-info"/>
+        <Label fx:id="prixLabel" styleClass="event-price"/>
+    </VBox>
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button text="Détails" onAction="#handleDetails" 
+                style="-fx-background-color: #3498db; -fx-text-fill: white;"/>
+        <Button text="Participer" onAction="#handleParticipate" 
+                styleClass="participate-button"/>
+    </HBox>
+</VBox> 

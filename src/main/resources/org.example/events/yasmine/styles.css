@@ -1,0 +1,93 @@
+.event-card {
+    -fx-background-color: white;
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);
+    -fx-padding: 15;
+    -fx-spacing: 10;
+}
+
+.event-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.3), 15, 0, 0, 5);
+    -fx-scale-x: 1.02;
+    -fx-scale-y: 1.02;
+    -fx-transition: all 0.2s ease-in-out;
+}
+
+.event-title {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.event-description {
+    -fx-font-size: 14px;
+    -fx-text-fill: #7f8c8d;
+    -fx-wrap-text: true;
+}
+
+.event-info {
+    -fx-font-size: 14px;
+    -fx-text-fill: #34495e;
+}
+
+.event-price {
+    -fx-font-size: 16px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #e74c3c;
+}
+
+.participate-button {
+    -fx-background-color: #2ecc71;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-background-radius: 5;
+    -fx-padding: 8 15;
+    -fx-cursor: hand;
+}
+
+.participate-button:hover {
+    -fx-background-color: #27ae60;
+}
+
+.event-image {
+    -fx-background-radius: 5;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);
+}
+
+.scroll-pane {
+    -fx-background-color: transparent;
+    -fx-padding: 20;
+}
+
+.scroll-pane > .viewport {
+    -fx-background-color: #f5f5f5;
+}
+
+.event-grid {
+    -fx-hgap: 20;
+    -fx-vgap: 20;
+    -fx-padding: 20;
+    -fx-alignment: center;
+}
+
+.details-view {
+    -fx-background-color: white;
+    -fx-padding: 30;
+}
+
+.details-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.details-info {
+    -fx-font-size: 16px;
+    -fx-text-fill: #34495e;
+    -fx-spacing: 10;
+}
+
+.details-image {
+    -fx-background-radius: 10;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.2), 10, 0, 0, 3);
+} 

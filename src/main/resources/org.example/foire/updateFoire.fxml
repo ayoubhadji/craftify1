@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="15" alignment="CENTER" xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.foire.UpdateFoireController"
+      stylesheets="@styles.css"
+      prefWidth="500.0" prefHeight="600.0"
+      styleClass="main-gradient-bg">
+
+    <Label text="Modifier une Foire" styleClass="main-title"/>
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Nom:"/>
+        <TextField fx:id="nomField" promptText="Nom de la foire" styleClass="form-field" HBox.hgrow="ALWAYS"/>
+    </HBox>
+    <Label fx:id="nomError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Description:"/>
+        <TextArea fx:id="descriptionField" promptText="Description" styleClass="form-field" HBox.hgrow="ALWAYS" prefRowCount="2"/>
+    </HBox>
+    <Label fx:id="descriptionError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Date début:"/>
+        <DatePicker fx:id="dateDebutField" styleClass="form-field"/>
+    </HBox>
+    <Label fx:id="dateDebutError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Date fin:"/>
+        <DatePicker fx:id="dateFinField" styleClass="form-field"/>
+    </HBox>
+    <Label fx:id="dateFinError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Lieu:"/>
+        <TextField fx:id="lieuField" promptText="Lieu de la foire" styleClass="form-field" HBox.hgrow="ALWAYS"/>
+        <Button fx:id="chooseOnMapButton" text="📍 Choisir sur la carte" styleClass="form-btn"/>
+    </HBox>
+    <Label fx:id="lieuError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Capacité max:"/>
+        <TextField fx:id="capaciteMaxField" promptText="Capacité max" styleClass="form-field"/>
+    </HBox>
+    <Label fx:id="capaciteMaxError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Prix:"/>
+        <TextField fx:id="prixField" promptText="Prix" styleClass="form-field"/>
+    </HBox>
+    <Label fx:id="prixError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER_LEFT">
+        <Label text="Rate:"/>
+        <TextField fx:id="rateField" promptText="Rate" styleClass="form-field"/>
+    </HBox>
+    <Label fx:id="rateError" text="" styleClass="error-label"/>
+
+    <HBox spacing="10" alignment="CENTER">
+        <Button text="Modifier" onAction="#handleUpdate" styleClass="form-btn"/>
+        <Button text="Annuler" onAction="#handleCancel" styleClass="form-btn"/>
+    </HBox>
+</VBox>

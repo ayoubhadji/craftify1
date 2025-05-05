@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="16" alignment="TOP_CENTER" stylesheets="@styles.css"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.foire.AddFoireController"
+      styleClass="main-gradient-bg">
+    <HBox alignment="CENTER_LEFT" styleClass="header-bar" spacing="10">
+        <Label text="Ajouter une Foire" styleClass="main-title"/>
+    </HBox>
+    <ScrollPane fitToWidth="true" style="-fx-background-color:transparent;" prefViewportHeight="420" prefViewportWidth="420">
+        <content>
+            <HBox alignment="CENTER" style="-fx-padding: 0;">
+                <VBox spacing="10" alignment="CENTER" maxWidth="360"
+                      style="-fx-background-color: rgba(255,255,255,0.98); -fx-background-radius: 18px; -fx-padding: 16px 16px; -fx-effect: dropshadow(gaussian, #a0522d, 10, 0.2, 0, 2);">
+                    <Label text="Nom" styleClass="form-label"/>
+                    <TextField fx:id="nomField" promptText="Nom" styleClass="form-field"/>
+                    <Label fx:id="nomError" textFill="red"/>
+                    <Label text="Description" styleClass="form-label"/>
+                    <TextArea fx:id="descriptionField" promptText="Description" styleClass="form-field" prefRowCount="2"/>
+                    <Label fx:id="descriptionError" textFill="red"/>
+                    <Label text="Date Début" styleClass="form-label"/>
+                    <DatePicker fx:id="dateDebutField" promptText="Date Début" styleClass="form-field"/>
+                    <Label fx:id="dateDebutError" textFill="red"/>
+                    <Label text="Date Fin" styleClass="form-label"/>
+                    <DatePicker fx:id="dateFinField" promptText="Date Fin" styleClass="form-field"/>
+                    <Label fx:id="dateFinError" textFill="red"/>
+                    <Label text="Lieu" styleClass="form-label"/>
+                    <HBox spacing="8" alignment="CENTER_LEFT">
+                        <TextField fx:id="lieuField" promptText="Lieu" styleClass="form-field"/>
+                        <Button fx:id="chooseOnMapButton" text="📍 Choose on Map" styleClass="form-btn"/>
+                    </HBox>
+                    <Label fx:id="lieuError" textFill="red"/>
+                    <Label text="Capacité Max" styleClass="form-label"/>
+                    <TextField fx:id="capaciteMaxField" promptText="Capacité Max" styleClass="form-field"/>
+                    <Label fx:id="capaciteMaxError" textFill="red"/>
+                    <Label text="Prix" styleClass="form-label"/>
+                    <TextField fx:id="prixField" promptText="Prix" styleClass="form-field"/>
+                    <Label fx:id="prixError" textFill="red"/>
+                    <Label text="Rate" styleClass="form-label"/>
+                    <TextField fx:id="rateField" promptText="Rate" styleClass="form-field"/>
+                    <Label fx:id="rateError" textFill="red"/>
+                    <HBox spacing="10" alignment="CENTER">
+                        <Button text="Enregistrer" onAction="#handleSave" styleClass="form-btn"/>
+                        <Button text="Annuler" onAction="#handleCancel" styleClass="form-btn"/>
+                    </HBox>
+                </VBox>
+            </HBox>
+        </content>
+    </ScrollPane>
+</VBox>

@@ -22,6 +22,13 @@ public class BackController {
     public void ouvrirGestionCommandeslayoutX(ActionEvent event) {
         loadScene(event, "/org.example/commande/GestionCommandes.fxml", " commandes");
     }
+    public void gotoevents(ActionEvent event) { loadScene(event, "/org.example/events/yasmine/AfficherEvenement.fxml", "events");
+    }
+    public void gotofoire(ActionEvent event) { loadScene(event, "/org.example/foire/ViewFoire.fxml", "foire");
+    }
+    public void ouvrirStatistiques(ActionEvent event) {
+        loadScene(event, "/org.example/commande/statistiques.fxml", "Statistiques des commandes");
+    }
 
     public void logout(ActionEvent event) {
         loadScene(event, "/org.example/user/login.fxml", "Connexion");

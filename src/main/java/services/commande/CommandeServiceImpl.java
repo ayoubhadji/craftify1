@@ -39,6 +39,11 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
+    public List<Commande> getAll() {
+        return getAllCommandes(); // Réutiliser la méthode existante
+    }
+
+    @Override
     public void save(Commande commande) {
         String sql = "INSERT INTO commande (id_client_id, date_commande, statut, total) VALUES (?, ?, ?, ?)";
 

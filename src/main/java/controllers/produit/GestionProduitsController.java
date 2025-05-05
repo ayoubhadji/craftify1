@@ -22,7 +22,6 @@ import services.produit.ProduitServiceImpl;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class GestionProduitsController implements Initializable {
@@ -128,7 +127,7 @@ public class GestionProduitsController implements Initializable {
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Sélectionner une image");
         fileChooser.getExtensionFilters().addAll(
-            new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif")
+                new FileChooser.ExtensionFilter("Images", "*.png", "*.jpg", "*.jpeg", "*.gif")
         );
         File selectedFile = fileChooser.showOpenDialog(null);
         if (selectedFile != null) {
@@ -140,14 +139,14 @@ public class GestionProduitsController implements Initializable {
     private void handleAjouter() {
         try {
             validateFields();
-            
+
             Produit produit = new Produit(
-                nomField.getText(),
-                descriptionField.getText(),
-                Double.parseDouble(prixField.getText()),
-                Integer.parseInt(stockField.getText()),
-                imageUrlField.getText(),
-                Integer.parseInt(artisanIdField.getText())
+                    nomField.getText(),
+                    descriptionField.getText(),
+                    Double.parseDouble(prixField.getText()),
+                    Integer.parseInt(stockField.getText()),
+                    imageUrlField.getText(),
+                    Integer.parseInt(artisanIdField.getText())
             );
 
             produitService.addProduit(produit);
@@ -168,7 +167,7 @@ public class GestionProduitsController implements Initializable {
             }
 
             validateModificationFields();
-            
+
             int id = Integer.parseInt(idModifField.getText());
             Produit produit = produitService.getProduitById(id);
             if (produit == null) {
@@ -198,13 +197,13 @@ public class GestionProduitsController implements Initializable {
         if (descriptionModifField.getText().isEmpty()) throw new IllegalArgumentException("La description est requise");
         if (prixModifField.getText().isEmpty()) throw new IllegalArgumentException("Le prix est requis");
         if (stockModifField.getText().isEmpty()) throw new IllegalArgumentException("Le stock est requis");
-        
+
         try {
             Double.parseDouble(prixModifField.getText());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Le prix doit être un nombre valide");
         }
-        
+
         try {
             Integer.parseInt(stockModifField.getText());
         } catch (NumberFormatException e) {
@@ -242,19 +241,19 @@ public class GestionProduitsController implements Initializable {
         if (prixField.getText().isEmpty()) throw new IllegalArgumentException("Le prix est requis");
         if (stockField.getText().isEmpty()) throw new IllegalArgumentException("Le stock est requis");
         if (artisanIdField.getText().isEmpty()) throw new IllegalArgumentException("L'ID de l'artisan est requis");
-        
+
         try {
             Double.parseDouble(prixField.getText());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Le prix doit être un nombre valide");
         }
-        
+
         try {
             Integer.parseInt(stockField.getText());
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Le stock doit être un nombre entier");
         }
-        
+
         try {
             Integer.parseInt(artisanIdField.getText());
         } catch (NumberFormatException e) {
@@ -270,7 +269,7 @@ public class GestionProduitsController implements Initializable {
     private void showError(String title, String message) {
         messageLabel.setStyle("-fx-text-fill: red;");
         messageLabel.setText(message);
-        
+
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
         alert.setContentText(message);
@@ -306,18 +305,47 @@ public class GestionProduitsController implements Initializable {
     @FXML
     private void retourMenuPrincipal(ActionEvent event) {
         try {
-            loadScene(event, "/org.example/home.fxml", "Menu Principal");
+            loadScene(event, "/org.example/dashboard.fxml", "Menu Principal");
         } catch (IOException e) {
             showError("Erreur de navigation", "Impossible de retourner au menu principal");
         }
     }
 
+
+    public void handleRafraichir(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void naviguerVersAjout(ActionEvent event) throws IOException {
+        loadScene(event, "/org.example/produit/AjouterProduit.fxml", "Ajouter un Produit");
+    }
+
+    @FXML
+    private void naviguerVersModification(ActionEvent event) throws IOException {
+        loadScene(event, "/org.example/produit/ModifierProduit.fxml", "Modifier un Produit");
+    }
+
+    @FXML
+    private void naviguerVersSuppression(ActionEvent event) throws IOException {
+        loadScene(event, "/org.example/produit/SupprimerProduit.fxml", "Supprimer un Produit");
+    }
+
+    @FXML
+    private void naviguerVersAffichage(ActionEvent event) throws IOException {
+        loadScene(event, "/org.example/produit/AfficherProduit.fxml", "Liste des Produits");
+    }
+
     private void loadScene(ActionEvent event, String fxmlPath, String title) throws IOException {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
-        Parent root = loader.load();
-        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        stage.setScene(new Scene(root));
-        stage.show();
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(fxmlPath));
+            Parent root = loader.load();
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+            stage.show();
+        } catch (IOException e) {
+            System.err.println("Erreur lors du chargement de la scène : " + e.getMessage());
+            throw e;
+        }
     }
 }

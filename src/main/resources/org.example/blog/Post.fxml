@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="800" prefWidth="1100" style="-fx-background-color: #F0F4F8;" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.blog.PostController">
+
+    <!-- 🔵 Barre de navigation (haut) -->
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #1e1e1e;">
+            <Label style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;" text="🏠 Craftify">
+                <font>
+                    <Font name="Segoe UI Bold" size="20.0" />
+                </font>
+            </Label>
+            <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Accueil" />
+            <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: white;" text="foire" />
+            <Button onAction="#gotoevents" style="-fx-background-color: transparent; -fx-text-fill: white;" text="evenement" />
+            <Button onAction="#goprudect" style="-fx-background-color: transparent; -fx-text-fill: white;" text="produit" />
+            <Button onAction="#gopost" prefHeight="26.0" prefWidth="154.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="blog" />
+            <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: white;" text="meriam" />
+            <Button onAction="#goToProfile" style="-fx-background-color: #2c2c2c; -fx-text-fill: #00adb5; -fx-background-radius: 8;" text="👤 Profil" />
+            <Button onAction="#logout" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;" text="🚪 Déconnexion" />
+        </HBox>
+    </top>
+
+    <!-- 🟢 Contenu principal -->
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;">
+
+            <!-- Section Header -->
+            <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #E3F2FD; -fx-padding: 15; -fx-background-radius: 10;">
+                <Button fx:id="toggleFormButton" onAction="#togglePostForm" style="-fx-font-size: 14px; -fx-background-color: #2196F3; -fx-text-fill: white; -fx-font-weight: bold;" text="➕ Ajouter un Post" />
+                <Label style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #333;" text="🗂 Liste des Posts" />
+            </VBox>
+
+            <!-- Section Formulaire -->
+            <TitledPane fx:id="postFormPane" expanded="true" managed="false" style="-fx-font-weight: bold;" text="Créer un Post" visible="false">
+                <VBox spacing="15" style="-fx-background-color: #FFFFFF; -fx-background-radius: 10;">
+                    <padding>
+                        <Insets bottom="20" left="20" right="20" top="20" />
+                    </padding>
+
+                    <GridPane hgap="15" vgap="15">
+                        <columnConstraints>
+                            <ColumnConstraints halignment="RIGHT" minWidth="120" />
+                            <ColumnConstraints hgrow="ALWAYS" />
+                        </columnConstraints>
+
+                        <Label text="Type:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                        <ComboBox fx:id="typePostComboBox" promptText="Choisir un type" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                        <Label text="Contenu:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                        <TextField fx:id="contenuField" promptText="Contenu du post" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                        <Label text="Image:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                        <HBox spacing="10" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <TextField fx:id="mediaUrlField" promptText="Chemin vers une image" HBox.hgrow="ALWAYS" />
+                            <Button onAction="#browseImage" text="📁">
+                                <tooltip><Tooltip text="Choisir une image" /></tooltip>
+                            </Button>
+                        </HBox>
+
+                        <Label text="Date de publication:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                        <DatePicker fx:id="datePublicationPicker" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+
+                        <Label text="Tranche d'âge:" GridPane.columnIndex="0" GridPane.rowIndex="4" />
+                        <TextField fx:id="trancheDageField" promptText="Ex: 18-25" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+
+                        <Label text="Likes:" GridPane.columnIndex="0" GridPane.rowIndex="5" />
+                        <TextField fx:id="nmbLikeField" promptText="Nombre de likes" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                  <rowConstraints>
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                     <RowConstraints />
+                  </rowConstraints>
+                    </GridPane>
+
+                    <HBox alignment="CENTER" spacing="20">
+                        <Button onAction="#addPost" style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-weight: bold;" text="✅ Ajouter" />
+                        <Button onAction="#cancelEditPost" style="-fx-background-color: #f44336; -fx-text-fill: white;" text="❌ Annuler" />
+                    </HBox>
+                </VBox>
+            </TitledPane>
+
+            <!-- Section Rechercher / Filtrer -->
+            <HBox alignment="CENTER" spacing="15" style="-fx-background-color: #E8F0FE; -fx-padding: 15; -fx-background-radius: 10;">
+                <TextField fx:id="searchField" prefWidth="300" promptText="🔍 Rechercher un post par contenu" style="-fx-font-size: 14px; -fx-padding: 8; -fx-background-radius: 8;" />
+                <ComboBox fx:id="typeFilter" prefWidth="200" promptText="📂 Filtrer par type" style="-fx-font-size: 14px; -fx-background-radius: 8;" />
+                <Button onAction="#goToRecommendedPosts" style="-fx-font-size: 13px; -fx-background-color: #03A9F4; -fx-text-fill: white; -fx-background-radius: 8;" text="🎯 Voir les Recommandations" />
+            </HBox>
+
+            <!-- Section Liste des Posts -->
+            <ScrollPane fitToHeight="false" fitToWidth="true" prefHeight="509.0" prefWidth="1060.0" style="-fx-background: #ffffff;">
+                <VBox fx:id="postContainer" alignment="TOP_CENTER" spacing="20" style="-fx-padding: 20;">
+                    <padding>
+                        <Insets bottom="10" left="10" right="10" top="10" />
+                    </padding>
+                </VBox>
+            </ScrollPane>
+
+        </VBox>
+    </center>
+
+</BorderPane>

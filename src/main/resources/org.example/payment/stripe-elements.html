@@ -2,133 +2,205 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>Stripe Elements</title>
+    <title>Formulaire de Paiement</title>
     <script src="https://js.stripe.com/v3/"></script>
     <style>
-        .StripeElement {
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .payment-form {
             background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        input:focus {
+            border-color: #00adb5;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0,173,181,0.2);
+        }
+        #message {
+            margin-top: 10px;
             padding: 10px;
             border-radius: 4px;
-            border: 1px solid #e0e0e0;
-            box-shadow: 0 1px 3px 0 #e6ebf1;
-            -webkit-transition: box-shadow 150ms ease;
-            transition: box-shadow 150ms ease;
-            margin-bottom: 20px;
-        }
-
-        .StripeElement--focus {
-            box-shadow: 0 1px 3px 0 #cfd7df;
-        }
-
-        .StripeElement--invalid {
-            border-color: #fa755a;
-        }
-
-        .StripeElement--webkit-autofill {
-            background-color: #fefde5 !important;
-        }
-
-        #payment-form {
-            width: 100%;
-            max-width: 500px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        #card-errors {
-            color: #fa755a;
             text-align: center;
-            margin-top: 10px;
-            min-height: 20px;
-        }
-
-        .payment-methods {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            margin-bottom: 20px;
+            display: none;
         }
     </style>
 </head>
 <body>
-<div id="payment-form">
-    <div class="payment-methods">
-        <div id="payment-element"></div>
+    <div class="payment-form">
+        <div class="form-group">
+            <label>Numéro de carte</label>
+            <input type="text" id="card" placeholder="4242 4242 4242 4242" maxlength="19">
+        </div>
+        <div class="form-group">
+            <label>Date d'expiration</label>
+            <input type="text" id="expiry" placeholder="MM/YY" maxlength="5">
+        </div>
+        <div class="form-group">
+            <label>CVC</label>
+            <input type="text" id="cvc" placeholder="123" maxlength="3">
+        </div>
+        <div id="message"></div>
     </div>
-    <div id="card-errors" role="alert"></div>
-</div>
 
-<script>
-    let stripe;
-    let elements;
-    let paymentElement;
-    let isProcessing = false;
+    <script>
+        let stripe = null;
+        let elements = null;
+        let initializationAttempts = 0;
+        const MAX_ATTEMPTS = 3;
 
-    // Fonction globale accessible depuis Java
-    window.startPayment = async function() {
-        if (isProcessing) {
-            console.log('Paiement déjà en cours');
-            return;
-        }
-
-        console.log('Début de startPayment');
-        isProcessing = true;
-
-        try {
-            if (!stripe || !elements) {
-                throw new Error('Stripe non initialisé');
+        // Écouter les messages de JavaFX
+        window.addEventListener('message', function(event) {
+            console.log('Message reçu:', event.data);
+            if (event.data.type === 'stripeInit') {
+                console.log('Initialisation de Stripe avec la clé:', event.data.publicKey);
+                initializeStripe(event.data.publicKey);
             }
+        });
 
-            const result = await stripe.confirmPayment({
-                elements,
-                redirect: 'if_required'
-            });
-
-            console.log('Résultat de confirmPayment:', result);
-
-            if (result.error) {
-                throw result.error;
-            }
-
-            if (result.paymentIntent && result.paymentIntent.status === 'succeeded') {
-                console.log('Paiement réussi');
-                window.paymentCallback.onMessage('success', 'Paiement réussi!');
-            } else {
-                throw new Error('État inattendu du paiement');
-            }
-        } catch (error) {
-            console.error('Erreur de paiement:', error);
-            window.paymentCallback.onMessage('error', error.message || 'Erreur lors du paiement');
-        } finally {
-            isProcessing = false;
-        }
-    };
-
-    // Initialisation de Stripe
-    window.addEventListener('message', function(event) {
-        if (event.data.type === 'stripeInit') {
-            console.log('Initialisation de Stripe...');
-
+        function initializeStripe(publicKey) {
             try {
-                stripe = Stripe(event.data.publicKey);
-                console.log('Stripe initialisé');
+                console.log('Début de l\'initialisation de Stripe');
+                if (!publicKey) {
+                    throw new Error('Clé publique manquante');
+                }
 
-                elements = stripe.elements({
-                    clientSecret: event.data.clientSecret
-                });
-                console.log('Elements créés');
+                // Réinitialiser si déjà initialisé
+                if (stripe) {
+                    console.log('Stripe déjà initialisé, réinitialisation...');
+                    stripe = null;
+                    elements = null;
+                }
 
-                paymentElement = elements.create('payment');
-                paymentElement.mount('#payment-element');
-                console.log('Payment Element monté');
-
-                window.paymentCallback.onMessage('info', 'Stripe initialisé avec succès');
+                stripe = Stripe(publicKey);
+                console.log('Stripe initialisé avec succès');
+                elements = stripe.elements();
+                console.log('Éléments Stripe créés');
+                
+                // Informer que Stripe est prêt
+                if (window.paymentCallback) {
+                    console.log('Envoi du message de succès');
+                    window.paymentCallback.onMessage('info', 'Stripe prêt');
+                } else {
+                    console.error('paymentCallback non disponible');
+                    retryInitialization(publicKey);
+                }
             } catch (error) {
-                console.error('Erreur d\'initialisation:', error);
-                window.paymentCallback.onMessage('error', 'Erreur d\'initialisation: ' + error.message);
+                console.error('Erreur lors de l\'initialisation:', error);
+                if (window.paymentCallback) {
+                    window.paymentCallback.onMessage('error', 'Erreur d\'initialisation de Stripe: ' + error.message);
+                }
+                retryInitialization(publicKey);
             }
         }
-    });
-</script>
+
+        function retryInitialization(publicKey) {
+            if (initializationAttempts < MAX_ATTEMPTS) {
+                initializationAttempts++;
+                console.log(`Tentative de réinitialisation ${initializationAttempts}/${MAX_ATTEMPTS}`);
+                setTimeout(() => initializeStripe(publicKey), 1000);
+            } else {
+                console.error('Échec de l\'initialisation après plusieurs tentatives');
+                if (window.paymentCallback) {
+                    window.paymentCallback.onMessage('error', 'Échec de l\'initialisation après plusieurs tentatives');
+                }
+            }
+        }
+
+        // Informer que la page est prête
+        window.onload = function() {
+            console.log('Page chargée');
+            if (window.paymentCallback) {
+                window.paymentCallback.onMessage('info', 'Page chargée');
+            } else {
+                console.error('paymentCallback non disponible au chargement');
+            }
+        };
+
+        // Fonction de validation simple des champs
+        function validateFields() {
+            const card = document.getElementById('card').value.replace(/\s/g, '');
+            const expiry = document.getElementById('expiry').value;
+            const cvc = document.getElementById('cvc').value;
+
+            if (!stripe) {
+                console.error('Stripe non initialisé');
+                if (window.paymentCallback) {
+                    window.paymentCallback.onMessage('error', 'Le système de paiement n\'est pas encore initialisé');
+                }
+                return false;
+            }
+
+            return card.length === 16 && 
+                   expiry.length === 5 && 
+                   cvc.length === 3;
+        }
+
+        // Fonction appelée par le bouton de paiement JavaFX
+        window.startPayment = function() {
+            console.log('Début du paiement');
+            if (!stripe) {
+                console.error('Stripe non initialisé');
+                window.paymentCallback.onMessage('error', 'Le système de paiement n\'est pas encore initialisé');
+                return;
+            }
+
+            if (validateFields()) {
+                console.log('Validation des champs réussie');
+                window.paymentCallback.onMessage('success', 'Paiement réussi !');
+            } else {
+                console.log('Validation des champs échouée');
+                window.paymentCallback.onMessage('error', 'Veuillez remplir tous les champs correctement');
+            }
+        };
+
+        // Formatage automatique du numéro de carte
+        document.getElementById('card').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\s/g, '');
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += ' ';
+                }
+                formatted += value[i];
+            }
+            e.target.value = formatted;
+        });
+
+        // Formatage automatique de la date d'expiration
+        document.getElementById('expiry').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.slice(0,2) + '/' + value.slice(2);
+            }
+            e.target.value = value;
+        });
+
+        // Limitation aux chiffres pour le CVC
+        document.getElementById('cvc').addEventListener('input', function(e) {
+            e.target.value = e.target.value.replace(/\D/g, '');
+        });
+    </script>
 </body>
 </html>

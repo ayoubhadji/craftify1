@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.ParticipationCellController"
+      spacing="10"
+      style="-fx-background-color: white; -fx-padding: 10; -fx-border-color: #e0e0e0; -fx-border-width: 0 0 1 0;">
+    
+    <VBox spacing="5" HBox.hgrow="ALWAYS">
+        <HBox spacing="10">
+            <Label text="Utilisateur:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="userLabel"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Événement:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="evenementLabel"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Prix:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="prixLabel"/>
+        </HBox>
+        <HBox spacing="10">
+            <Label text="Statut:" style="-fx-font-weight: bold;"/>
+            <Label fx:id="statutLabel"/>
+        </HBox>
+    </VBox>
+
+    <VBox spacing="5" alignment="CENTER_RIGHT">
+        <Button text="Détails" onAction="#handleDetails" style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
+    </VBox>
+
+</HBox> 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.DetailsEvenementFrontController"
+      styleClass="details-view"
+      spacing="20">
+
+    <padding>
+        <Insets top="30" right="30" bottom="30" left="30"/>
+    </padding>
+
+    <ImageView fx:id="imageView" fitWidth="600" fitHeight="300" preserveRatio="true"
+               styleClass="details-image"/>
+
+    <Label fx:id="titleLabel" styleClass="details-title"/>
+
+    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent;">
+        <VBox spacing="15">
+            <Label fx:id="descriptionLabel" styleClass="details-info" wrapText="true"/>
+            
+            <VBox spacing="10" styleClass="details-info">
+                <Label fx:id="dateDebutLabel"/>
+                <Label fx:id="dateFinLabel"/>
+                <Label fx:id="lieuLabel"/>
+                <Label fx:id="capaciteLabel"/>
+                <Label fx:id="typeLabel"/>
+                <Label fx:id="prixLabel" styleClass="event-price"/>
+                <Label fx:id="organisateurLabel"/>
+            </VBox>
+
+            <HBox spacing="10" alignment="CENTER_RIGHT">
+                <Button text="Retour" onAction="#handleRetour"
+                        style="-fx-background-color: #95a5a6; -fx-text-fill: white;"/>
+                <Button text="Participer" onAction="#handleParticipate"
+                        styleClass="participate-button"/>
+            </HBox>
+        </VBox>
+    </ScrollPane>
+</VBox> 

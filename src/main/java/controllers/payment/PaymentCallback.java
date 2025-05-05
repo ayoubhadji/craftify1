@@ -4,14 +4,13 @@ public class PaymentCallback {
 
     private final StripePaymentController stripePaymentController;
 
-    // Constructor that accepts a StripePaymentController instance
+    // Constructeur
     public PaymentCallback(StripePaymentController stripePaymentController) {
         this.stripePaymentController = stripePaymentController;
     }
 
-    // Method to handle the payment callback and notify the controller
-    public void handlePaymentCallback(String status, String message) {
-        // Now, call the method from the controller
-        stripePaymentController.handlePaymentCallback(status, message);
+    // Appelé par Stripe HTML
+    public void onMessage(String type, String message) {
+        stripePaymentController.handlePaymentCallback(type, message);
     }
 }

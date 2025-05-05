@@ -37,7 +37,7 @@ public class SignUpController {
 
     // Initialize method to set default values in ComboBoxes
     public void initialize() {
-        roleComboBox.setItems(FXCollections.observableArrayList("ADMIN", "USER" , "ARTISAN"));
+        roleComboBox.setItems(FXCollections.observableArrayList( "USER" , "ARTISAN"));
         sexeComboBox.setItems(FXCollections.observableArrayList("Homme", "Femme"));
     }
 

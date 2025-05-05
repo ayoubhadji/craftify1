@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="mainVBox" stylesheets="@styles.css" spacing="10" alignment="TOP_CENTER"
+      prefWidth="900.0" prefHeight="650.0"
+      xmlns="http://javafx.com/javafx/8.0.171"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.foire.ViewFoire2Controller"
+      styleClass="main-gradient-bg">
+
+    <!-- 🌙 Barre de navigation sombre -->
+    <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15; -fx-background-color: #1e1e1e;">
+        <Label prefHeight="30.0" prefWidth="107.0"
+               style="-fx-text-fill: #ffffff; -fx-font-size: 20px; -fx-font-weight: bold;"
+               text="🏠 Craftify" />
+        <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Accueil" />
+        <Button onAction="#gotofoire" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Foire" />
+        <Button onAction="#gotoevents" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Evénement" />
+        <Button onAction="#goprudect" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Produit" />
+        <Button onAction="#gopost" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Blog" />
+        <Button onAction="#goHome" style="-fx-background-color: transparent; -fx-text-fill: #ffffff;" text="Meriam" />
+        <Button onAction="#goToProfile" style="-fx-background-color: #2c2c2c; -fx-text-fill: #00adb5; -fx-background-radius: 8;" text="👤 Profil" />
+        <Button onAction="#logout" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-background-radius: 8;" text="🚪 Déconnexion" />
+    </HBox>
+
+    <!-- 🎯 Contenu spécifique à la page -->
+    <HBox spacing="10" alignment="CENTER_LEFT" styleClass="header-bar">
+        <Label text="Liste des Foires" styleClass="main-title"/>
+    </HBox>
+
+    <ListView fx:id="foireListView" style="-fx-background-color:transparent; -fx-padding:0;" VBox.vgrow="ALWAYS"/>
+
+</VBox>

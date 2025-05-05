@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.image.ImageView?>
+
+<HBox xmlns="http://javafx.com/javafx"
+      xmlns:fx="http://javafx.com/fxml"
+      fx:controller="controllers.events.EvenementCellController"
+      spacing="10">
+    <padding>
+        <Insets top="5" right="5" bottom="5" left="5"/>
+    </padding>
+    <style>-fx-background-color: #f0f0f0; -fx-background-radius: 5;</style>
+
+    <ImageView fx:id="imageView" fitWidth="100" fitHeight="100" preserveRatio="true"/>
+    
+    <VBox spacing="5">
+        <Label fx:id="nomLabel" style="-fx-font-weight: bold;"/>
+        <Label fx:id="descriptionLabel" wrapText="true" maxWidth="300"/>
+        <Label fx:id="dateLabel"/>
+        <Label fx:id="lieuLabel"/>
+        <Label fx:id="prixLabel"/>
+    </VBox>
+
+</HBox> 
