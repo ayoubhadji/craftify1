@@ -2,185 +2,114 @@ package tn.esprit.controllers;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 import tn.esprit.entities.Expedition;
 import tn.esprit.services.ExpeditionService;
 
 import java.io.IOException;
-import java.time.LocalDate;
+import java.sql.SQLException;
+import java.util.List;
 
 public class ExpeditionController {
 
-    @FXML private TextField titreField;
-    @FXML private TextField objectifField;
-    @FXML private DatePicker dateDebutPicker;
-    @FXML private DatePicker dateFinPicker;
-    @FXML private TextField aventurierIdField;
-    @FXML private TextField videoUrlField;
+    @FXML
+    private ListView<Expedition> expeditionListView;
 
-    @FXML private ListView<String> expeditionListView;
+    @FXML
+    private Button btnAjouter, btnSupprimer;
 
     private final ExpeditionService expeditionService = new ExpeditionService();
-    private ObservableList<Expedition> expeditionObservableList = FXCollections.observableArrayList();
-    private Expedition selectedExpedition = null;
 
     @FXML
     public void initialize() {
-        afficherExpeditions();
-
-        expeditionListView.setOnMouseClicked(event -> {
-            int index = expeditionListView.getSelectionModel().getSelectedIndex();
-            if (index >= 0 && index < expeditionObservableList.size()) {
-                selectedExpedition = expeditionObservableList.get(index);
-                remplirChamps(selectedExpedition);
-            }
-        });
+        chargerExpeditions();
     }
 
-    private void remplirChamps(Expedition expedition) {
-        titreField.setText(expedition.getTitre());
-        objectifField.setText(expedition.getObjectif());
-        dateDebutPicker.setValue(expedition.getDateDebut());
-        dateFinPicker.setValue(expedition.getDateFin());
-        aventurierIdField.setText(String.valueOf(expedition.getAventurierId()));
-        videoUrlField.setText(expedition.getVideoUrl());
+    private void chargerExpeditions() {
+        try {
+            List<Expedition> list = expeditionService.getAllExpeditions();
+            ObservableList<Expedition> observableList = FXCollections.observableArrayList(list);
+            expeditionListView.setItems(observableList);
+
+            // 👇 Personnalisation des cellules
+            expeditionListView.setCellFactory(listView -> new javafx.scene.control.ListCell<>() {
+                @Override
+                protected void updateItem(Expedition expedition, boolean empty) {
+                    super.updateItem(expedition, empty);
+                    if (empty || expedition == null) {
+                        setGraphic(null);
+                    } else {
+                        try {
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("/ExpeditionCell.fxml"));
+                            Parent cellRoot = loader.load();
+                            FrontController controller = loader.getController();
+                            controller.setExpedition(expedition);
+                            setGraphic(cellRoot);
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            setGraphic(null);
+                        }
+                    }
+                }
+            });
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
-    private void onVoirAventurierClick() {
+    void handleAjouter(ActionEvent event) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/aventurier_view.fxml"));
-            Parent root = fxmlLoader.load();
-
-            // Option 1 : remplacer le contenu de la fenêtre actuelle
-            titreField.getScene().setRoot(root);
-
-            // Option 2 (alternative) : ouvrir dans une nouvelle fenêtre
-            /*
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/add_expedition.fxml"));
+            Parent root = loader.load();
             Stage stage = new Stage();
-            stage.setTitle("Liste des Aventuriers");
+            stage.setTitle("Ajouter une expédition");
             stage.setScene(new Scene(root));
-            stage.show();
-            */
-
+            stage.showAndWait();
+            chargerExpeditions(); // Rafraîchir la liste après ajout
         } catch (IOException e) {
             e.printStackTrace();
-            showAlert("Erreur", "Impossible de charger la vue des aventuriers.");
         }
     }
 
     @FXML
-    public void ajouterExpedition() {
-        if (titreField.getText().isEmpty() || objectifField.getText().isEmpty() ||
-                dateDebutPicker.getValue() == null || dateFinPicker.getValue() == null ||
-                aventurierIdField.getText().isEmpty() || videoUrlField.getText().isEmpty()) {
-            showAlert("Erreur", "Tous les champs doivent être remplis.");
-            return;
-        }
-
-        if (dateDebutPicker.getValue().isAfter(dateFinPicker.getValue())) {
-            showAlert("Erreur", "La date de début ne peut pas être après la date de fin.");
-            return;
-        }
-
-        int aventurierId;
-        try {
-            aventurierId = Integer.parseInt(aventurierIdField.getText());
-        } catch (NumberFormatException e) {
-            showAlert("Erreur", "L'ID de l'aventurier doit être un nombre entier.");
-            return;
-        }
-
-        Expedition expedition = new Expedition(
-                titreField.getText(),
-                objectifField.getText(),
-                dateDebutPicker.getValue(),
-                dateFinPicker.getValue(),
-                aventurierId,
-                videoUrlField.getText()
-        );
-
-        expeditionService.addExpedition(expedition);
-        clearFields();
-        afficherExpeditions();
-    }
-
-    @FXML
-    public void modifierExpedition() {
-        if (selectedExpedition != null) {
-            if (titreField.getText().isEmpty() || objectifField.getText().isEmpty() ||
-                    dateDebutPicker.getValue() == null || dateFinPicker.getValue() == null ||
-                    aventurierIdField.getText().isEmpty() || videoUrlField.getText().isEmpty()) {
-                showAlert("Erreur", "Tous les champs doivent être remplis.");
-                return;
-            }
-
-            if (dateDebutPicker.getValue().isAfter(dateFinPicker.getValue())) {
-                showAlert("Erreur", "La date de début ne peut pas être après la date de fin.");
-                return;
-            }
-
-            int aventurierId;
+    void handleSupprimer(ActionEvent event) {
+        Expedition selected = expeditionListView.getSelectionModel().getSelectedItem();
+        if (selected != null) {
             try {
-                aventurierId = Integer.parseInt(aventurierIdField.getText());
-            } catch (NumberFormatException e) {
-                showAlert("Erreur", "L'ID de l'aventurier doit être un nombre entier.");
-                return;
+                expeditionService.deleteExpedition(selected.getId());
+                chargerExpeditions(); // Rafraîchir après suppression
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-
-            selectedExpedition.setTitre(titreField.getText());
-            selectedExpedition.setObjectif(objectifField.getText());
-            selectedExpedition.setDateDebut(dateDebutPicker.getValue());
-            selectedExpedition.setDateFin(dateFinPicker.getValue());
-            selectedExpedition.setAventurierId(aventurierId);
-            selectedExpedition.setVideoUrl(videoUrlField.getText());
-
-            expeditionService.updateExpedition(selectedExpedition);
-            clearFields();
-            afficherExpeditions();
         }
     }
 
     @FXML
-    public void supprimerExpedition() {
-        if (selectedExpedition != null) {
-            expeditionService.deleteExpedition(selectedExpedition.getId());
-            clearFields();
-            afficherExpeditions();
+    void handleModifier(ActionEvent event) {
+        Expedition selected = expeditionListView.getSelectionModel().getSelectedItem();
+        if (selected != null) {
+            try {
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edit_expedition.fxml"));
+                Parent root = loader.load();
+                EditExpeditionController controller = loader.getController();
+                controller.setExpedition(selected);
+                Stage stage = new Stage();
+                stage.setTitle("Modifier l'expédition");
+                stage.setScene(new Scene(root));
+                stage.showAndWait();
+                chargerExpeditions();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-    }
-
-    private void afficherExpeditions() {
-        expeditionObservableList.setAll(expeditionService.getAllExpeditions());
-        ObservableList<String> expeditionStringList = FXCollections.observableArrayList();
-
-        for (Expedition exp : expeditionObservableList) {
-            expeditionStringList.add(exp.toString());
-        }
-
-        expeditionListView.setItems(expeditionStringList);
-    }
-
-    private void clearFields() {
-        titreField.clear();
-        objectifField.clear();
-        dateDebutPicker.setValue(null);
-        dateFinPicker.setValue(null);
-        aventurierIdField.clear();
-        videoUrlField.clear();
-        selectedExpedition = null;
-    }
-
-    private void showAlert(String title, String message) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
-        alert.setHeaderText(null);
-        alert.setContentText(message);
-        alert.showAndWait();
     }
 }

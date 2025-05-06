@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.EditAventurierController"
+            prefWidth="600.0" prefHeight="500.0">
+
+    <VBox spacing="10" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20"
+          AnchorPane.bottomAnchor="20">
+        <Label text="Modifier un Aventurier" style="-fx-font-size: 18px; -fx-font-weight: bold;" />
+
+        <TextField fx:id="nomField" promptText="Nom" />
+        <TextField fx:id="prenomField" promptText="Prénom" />
+        <TextField fx:id="emailField" promptText="Email" />
+        <DatePicker fx:id="dateInscriptionField" promptText="Date d'inscription" />
+
+        <ComboBox fx:id="statutComboBox" promptText="Statut">
+            <!-- ComboBox items will be populated dynamically in the controller -->
+        </ComboBox>
+
+        <TextField fx:id="phoneNumberField" promptText="Numéro de Téléphone" />
+
+        <HBox spacing="10">
+            <Button fx:id="btnSave" text="Enregistrer" onAction="#handleSave"/>
+            <Button fx:id="btnCancel" text="Annuler" onAction="#handleCancel"/>
+        </HBox>
+    </VBox>
+
+</AnchorPane>

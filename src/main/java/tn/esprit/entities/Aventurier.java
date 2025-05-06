@@ -1,6 +1,7 @@
 package tn.esprit.entities;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class Aventurier {
     private int id;
@@ -10,6 +11,7 @@ public class Aventurier {
     private LocalDate dateInscription;
     private String status;
     private String phoneNumber;
+    private List<Expedition> expeditions;
 
     public Aventurier() {}
 
@@ -30,6 +32,13 @@ public class Aventurier {
         this.dateInscription = dateInscription;
         this.status = status;
         this.phoneNumber = phoneNumber;
+    }
+
+    // ✅ Constructeur simplifié pour les listes (id et nom uniquement)
+    public Aventurier(int id, String nom) {
+        this.id = id;
+        this.nom = nom;
+        this.prenom = ""; // facultatif : à adapter selon ton affichage
     }
 
     // Getters et Setters

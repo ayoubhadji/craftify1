@@ -2,21 +2,18 @@ package tn.esprit.test;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        // Assurez-vous que le chemin du fichier FXML est correct
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/expedition_view.fxml"));
-        AnchorPane root = loader.load();
-
-        Scene scene = new Scene(root);
-        primaryStage.setTitle("Gestion des expeditions");
-        primaryStage.setScene(scene);
+        // Charger le fichier FXML pour la vue principale
+        Parent root = FXMLLoader.load(getClass().getResource("/front.fxml"));
+        primaryStage.setTitle("Gestion des Expéditions");
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }
 

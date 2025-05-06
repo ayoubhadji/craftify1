@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<HBox spacing="15" xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml"
+      fx:controller="tn.esprit.controllers.FrontController"
+      alignment="CENTER_LEFT" style="-fx-padding: 10; -fx-border-color: #ddd;">
+
+    <VBox spacing="5" prefWidth="400">
+        <Label fx:id="titreLabel" style="-fx-font-weight: bold; -fx-font-size: 14px;" />
+        <Label fx:id="dateDebutLabel" />
+        <Label fx:id="dateFinLabel" />
+        <Label fx:id="videoUrlLabel" style="-fx-text-fill: blue;" />
+    </VBox>
+
+    <Button fx:id="participerButton" text="Participer" onAction="#handleParticiper" />
+</HBox>

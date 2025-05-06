@@ -6,6 +6,7 @@ public class Quiz {
     private String nom;
     private int dureeMax; // representing duree_max
     private int expeditionId; // representing expedition_id
+    private Expedition expedition;
 
     // Constructor without parameters
     public Quiz() {
@@ -14,6 +15,12 @@ public class Quiz {
     // Constructor with parameters
     public Quiz(int id, String nom, int dureeMax, int expeditionId) {
         this.id = id;
+        this.nom = nom;
+        this.dureeMax = dureeMax;
+        this.expeditionId = expeditionId;
+    }
+
+    public Quiz(String nom, int dureeMax, int expeditionId) {
         this.nom = nom;
         this.dureeMax = dureeMax;
         this.expeditionId = expeditionId;
@@ -50,6 +57,17 @@ public class Quiz {
 
     public void setExpeditionId(int expeditionId) {
         this.expeditionId = expeditionId;
+    }
+
+    public Expedition getExpedition() {
+        return expedition;
+    }
+
+    public void setExpedition(Expedition expedition) {
+        this.expedition = expedition;
+        if (expedition != null) {
+            this.expeditionId = expedition.getId();
+        }
     }
 
     @Override

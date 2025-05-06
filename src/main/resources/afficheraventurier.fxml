@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+
+<VBox xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AventurierController" spacing="10">
+    <!-- Affichage de la liste des aventuriers -->
+    <Label text="Liste des Aventuriers" />
+    <ListView fx:id="aventurierListView" prefHeight="200" prefWidth="300" />
+
+    <!-- Boutons pour ajouter, modifier et supprimer -->
+    <Button text="Ajouter" fx:id="ajouterAventurierButton" onAction="#onAjouterClick"/>
+    <Button text="Modifier" fx:id="modifierAventurierButton" onAction="#onModifierClick"/>
+    <Button text="Supprimer" fx:id="supprimerAventurierButton" onAction="#supprimerAventurier"/>
+</VBox>

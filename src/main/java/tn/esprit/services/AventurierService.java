@@ -15,15 +15,15 @@ public class AventurierService {
     }
 
     // CREATE
-    public void addAventurier(Aventurier aventurier) {
+    public boolean addAventurier(Aventurier aventurier) {
         String query = "INSERT INTO aventurier (nom, prenom, email, date_inscription, statut, phone_number) VALUES (?, ?, ?, ?, ?, ?)";
 
         if (connection == null) {
             System.err.println("❌ Impossible d'ajouter l'aventurier : connexion non établie.");
-            return;
+            return false;
         }
 
-        try (PreparedStatement pst = connection.prepareStatement(query)) {
+        try (PreparedStatement pst = connection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS)) {
             pst.setString(1, aventurier.getNom());
             pst.setString(2, aventurier.getPrenom());
             pst.setString(3, aventurier.getEmail());
@@ -31,11 +31,20 @@ public class AventurierService {
             pst.setString(5, aventurier.getStatus());
             pst.setString(6, aventurier.getPhoneNumber());
 
-            pst.executeUpdate();
-            System.out.println("✅ Aventurier ajouté avec succès.");
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                try (ResultSet generatedKeys = pst.getGeneratedKeys()) {
+                    if (generatedKeys.next()) {
+                        aventurier.setId(generatedKeys.getInt(1));
+                    }
+                }
+                System.out.println("✅ Aventurier ajouté avec succès.");
+                return true;
+            }
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de l'ajout de l'aventurier : " + e.getMessage());
         }
+        return false;
     }
 
     // READ
@@ -63,6 +72,8 @@ public class AventurierService {
                 );
                 aventuriers.add(aventurier);
             }
+
+            System.out.println("✅ Nombre d'aventuriers récupérés : " + aventuriers.size());
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de la récupération des aventuriers : " + e.getMessage());
         }
@@ -71,12 +82,17 @@ public class AventurierService {
     }
 
     // UPDATE
-    public void updateAventurier(Aventurier aventurier) {
+    public boolean updateAventurier(Aventurier aventurier) {
+        if (getAventurierById(aventurier.getId()) == null) {
+            System.err.println("❌ L'aventurier avec l'ID " + aventurier.getId() + " n'existe pas.");
+            return false;
+        }
+
         String query = "UPDATE aventurier SET nom = ?, prenom = ?, email = ?, date_inscription = ?, statut = ?, phone_number = ? WHERE id = ?";
 
         if (connection == null) {
             System.err.println("❌ Impossible de mettre à jour l'aventurier : connexion non établie.");
-            return;
+            return false;
         }
 
         try (PreparedStatement pst = connection.prepareStatement(query)) {
@@ -88,29 +104,42 @@ public class AventurierService {
             pst.setString(6, aventurier.getPhoneNumber());
             pst.setInt(7, aventurier.getId());
 
-            pst.executeUpdate();
-            System.out.println("✅ Aventurier mis à jour avec succès.");
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("✅ Aventurier mis à jour avec succès.");
+                return true;
+            }
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de la mise à jour de l'aventurier : " + e.getMessage());
         }
+        return false;
     }
 
     // DELETE
-    public void deleteAventurier(int id) {
+    public boolean deleteAventurier(int id) {
+        if (getAventurierById(id) == null) {
+            System.err.println("❌ L'aventurier avec l'ID " + id + " n'existe pas.");
+            return false;
+        }
+
         String query = "DELETE FROM aventurier WHERE id = ?";
 
         if (connection == null) {
             System.err.println("❌ Impossible de supprimer l'aventurier : connexion non établie.");
-            return;
+            return false;
         }
 
         try (PreparedStatement pst = connection.prepareStatement(query)) {
             pst.setInt(1, id);
-            pst.executeUpdate();
-            System.out.println("✅ Aventurier supprimé avec succès.");
+            int affectedRows = pst.executeUpdate();
+            if (affectedRows > 0) {
+                System.out.println("✅ Aventurier supprimé avec succès.");
+                return true;
+            }
         } catch (SQLException e) {
             System.err.println("❌ Erreur lors de la suppression de l'aventurier : " + e.getMessage());
         }
+        return false;
     }
 
     // FIND BY ID

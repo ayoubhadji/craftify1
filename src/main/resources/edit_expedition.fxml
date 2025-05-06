@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml"
+            fx:controller="tn.esprit.controllers.EditExpeditionController"
+            prefWidth="600.0" prefHeight="500.0">
+
+    <!-- Main container with some padding and spacing -->
+    <VBox spacing="20" AnchorPane.topAnchor="20" AnchorPane.leftAnchor="20" AnchorPane.rightAnchor="20" AnchorPane.bottomAnchor="20">
+
+        <!-- Title with styling for clarity -->
+        <Label text="Modifier l'expédition"
+               style="-fx-font-size: 22px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+
+        <!-- Form inputs for expedition details with proper styling and padding -->
+        <TextField fx:id="titreField" promptText="Titre de l'expédition" style="-fx-padding: 8; -fx-font-size: 14px;"/>
+        <TextField fx:id="objectifField" promptText="Objectif" style="-fx-padding: 8; -fx-font-size: 14px;"/>
+
+        <DatePicker fx:id="dateDebutPicker" promptText="Date de début" style="-fx-padding: 8; -fx-font-size: 14px;"/>
+        <DatePicker fx:id="dateFinPicker" promptText="Date de fin" style="-fx-padding: 8; -fx-font-size: 14px;"/>
+
+        <TextField fx:id="videoUrlField" promptText="Lien vidéo" style="-fx-padding: 8; -fx-font-size: 14px;"/>
+
+        <!-- Buttons for save and cancel actions with spacing and background colors -->
+        <HBox spacing="20" alignment="center">
+            <Button fx:id="btnSave" text="Enregistrer" onAction="#handleSave"
+                    style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;"/>
+            <Button fx:id="btnCancel" text="Annuler" onAction="#handleCancel"
+                    style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;"/>
+        </HBox>
+    </VBox>
+
+</AnchorPane>

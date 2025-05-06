@@ -1,6 +1,8 @@
 package tn.esprit.entities;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Représente une expédition associée à un aventurier.
@@ -13,12 +15,16 @@ public class Expedition {
     private LocalDate dateFin;
     private int aventurierId;
     private String videoUrl;
+    private List<Aventurier> aventuriers;
 
     // Constructeur vide (utile pour certaines opérations JavaFX ou ORM)
-    public Expedition() {}
+    public Expedition() {
+        this.aventuriers = new ArrayList<>();  // Initialiser la liste des aventuriers vide
+    }
 
     // Constructeur sans ID (utilisé pour la création d’une nouvelle expédition)
     public Expedition(String titre, String objectif, LocalDate dateDebut, LocalDate dateFin, int aventurierId, String videoUrl) {
+        this();
         this.titre = titre;
         this.objectif = objectif;
         this.dateDebut = dateDebut;
@@ -88,6 +94,15 @@ public class Expedition {
 
     public void setVideoUrl(String videoUrl) {
         this.videoUrl = videoUrl;
+    }
+
+    // Getter et Setter pour aventuriers
+    public List<Aventurier> getAventuriers() {
+        return aventuriers;
+    }
+
+    public void setAventuriers(List<Aventurier> aventuriers) {
+        this.aventuriers = aventuriers != null ? aventuriers : new ArrayList<>();  // Si la liste est null, l'initialiser à une nouvelle liste vide
     }
 
     @Override

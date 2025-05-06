@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.geometry.Pos?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AddAventurierController" spacing="10" alignment="CENTER">
+    <Label text="Ajouter un Aventurier" style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
+
+    <TextField fx:id="nomField" promptText="Nom" />
+    <TextField fx:id="prenomField" promptText="Prénom" />
+    <TextField fx:id="emailField" promptText="Email" />
+    <DatePicker fx:id="datePicker" promptText="Date d'inscription" />
+
+    <!-- Replacing TextField with ComboBox for Status -->
+    <ComboBox fx:id="statusComboBox" promptText="Status" />
+
+    <TextField fx:id="phoneField" promptText="Téléphone" />
+
+    <Button text="Enregistrer" onAction="#handleSave" />
+    <Button text="Annuler" onAction="#handleCancel" style="-fx-background-color: #ff0000; -fx-text-fill: white;"/>
+</VBox>

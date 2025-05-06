@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.HBox?>  <!-- Add this import for HBox -->
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="tn.esprit.controllers.AddExpeditionController" spacing="20" alignment="CENTER">
+    <!-- Title with larger font size and bold text -->
+    <Label text="Ajouter une Expédition"
+           style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #333333;"/>
+
+    <!-- Text Fields with padding and consistent font size -->
+    <TextField fx:id="titreField" promptText="Titre" style="-fx-padding: 10; -fx-font-size: 14px;"/>
+    <TextField fx:id="objectifField" promptText="Objectif" style="-fx-padding: 10; -fx-font-size: 14px;"/>
+
+    <DatePicker fx:id="dateDebutPicker" promptText="Date Début" style="-fx-padding: 10; -fx-font-size: 14px;"/>
+    <DatePicker fx:id="dateFinPicker" promptText="Date Fin" style="-fx-padding: 10; -fx-font-size: 14px;"/>
+
+    <TextField fx:id="videoUrlField" promptText="URL de la Vidéo" style="-fx-padding: 10; -fx-font-size: 14px;"/>
+
+    <!-- Buttons with customized styling for actions -->
+    <HBox spacing="15" alignment="CENTER">
+        <Button text="Ajouter" onAction="#handleSave"
+                style="-fx-background-color: #4CAF50; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;"/>
+        <Button text="Annuler" onAction="#handleCancel"
+                style="-fx-background-color: #F44336; -fx-text-fill: white; -fx-font-size: 14px; -fx-pref-width: 120px;"/>
+    </HBox>
+</VBox>

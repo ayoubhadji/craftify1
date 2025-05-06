@@ -18,49 +18,21 @@
                 <Label text="Gestion des Aventuriers"
                        style="-fx-font-size: 20px; -fx-font-weight: bold;"/>
 
-                <HBox spacing="10">
-                    <Label text="Nom:" minWidth="120"/>
-                    <TextField fx:id="nomField" prefWidth="400"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <Label text="Prénom:" minWidth="120"/>
-                    <TextField fx:id="prenomField" prefWidth="400"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <Label text="Email:" minWidth="120"/>
-                    <TextField fx:id="emailField" prefWidth="400"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <Label text="Date d'inscription:" minWidth="120"/>
-                    <DatePicker fx:id="dateInscriptionPicker"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <Label text="Statut:" minWidth="120"/>
-                    <TextField fx:id="statusField" prefWidth="400"/>
-                </HBox>
-
-                <HBox spacing="10">
-                    <Label text="Téléphone:" minWidth="120"/>
-                    <TextField fx:id="phoneNumberField" prefWidth="400"/>
-                </HBox>
 
                 <HBox spacing="15" alignment="CENTER_LEFT">
-                    <Button text="Ajouter" onAction="#ajouterAventurier"
+                    <Button text="Ajouter" onAction="#handleAdd"
                             style="-fx-background-color: #4CAF50; -fx-text-fill: white;"/>
-                    <Button text="Modifier" onAction="#modifierAventurier"
+                    <Button text="Modifier" onAction="#handleEdit"
                             style="-fx-background-color: #2196F3; -fx-text-fill: white;"/>
-                    <Button text="Supprimer" onAction="#supprimerAventurier"
+                    <Button text="Supprimer" onAction="#handleDelete"
                             style="-fx-background-color: #f44336; -fx-text-fill: white;"/>
-                    <Button text="Voir Expéditions" onAction="#onVoirExpeditionClick"/>
+
                 </HBox>
 
                 <Label text="Liste des Aventuriers"
                        style="-fx-font-size: 16px; -fx-font-weight: bold;"/>
-                <ListView fx:id="aventurierListView" prefHeight="180"/>
+                <ListView fx:id="listViewAventuriers" prefHeight="180"/>
+
 
             </children>
         </VBox>
