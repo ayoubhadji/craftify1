@@ -45,4 +45,12 @@ Foire
 - Maven
 - FXML + CSS
 
+  ## ⚙️ utulisations
+  - Cloner le projet
+  - Configurer la base dans utils/MyDataBase.java avec ta data base
+  - installation de maven et sceneBilder
+  - Lancer avec Maven : mvn javafx:run
+    
+
+
 
